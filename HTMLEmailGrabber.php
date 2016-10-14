@@ -291,3 +291,12 @@ function getHeaders($service,$userId,$messageId){
     return $headers;    
     
 }
+
+class Email {
+	public $From;
+	public $To;
+	public $Subject;
+	public $Date;
+	public $HTMLBody;
+}
+
