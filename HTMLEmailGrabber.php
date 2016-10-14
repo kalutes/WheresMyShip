@@ -126,6 +126,7 @@ $list = $gmail->users_messages->listUsersMessages('me', ['maxResults' => 1000]);
 $i = 0;
 mkdir('messages');
 chdir('messages');
+$date;
 try{
     while ($list->getMessages() != null) {
 
@@ -134,6 +135,9 @@ try{
             $message_id = $mlist->id;
             $optParamsGet2['format'] = 'full';
             $single_message = $gmail->users_messages->get('me', $message_id, $optParamsGet2);
+			$date = $single_message->getInternalDate() / 1000;
+			$dt = new DateTime("@$date");
+			$date = $dt->format('Y-m-d H-i-s');
             $payload = $single_message->getPayload();
             $parts = $payload->getParts();
             // With no attachment, the payload might be directly in the body, encoded.
@@ -251,7 +255,7 @@ try{
             }
             // Finally, print the message ID and the body
             print_r($message_id . "\r\n");
-			file_put_contents('message' . $i . '.html', $FOUND_BODY);
+			file_put_contents($date . " " . $i . '.html', $FOUND_BODY);
 			$i++;
         }
 
