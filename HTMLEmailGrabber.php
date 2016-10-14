@@ -269,3 +269,25 @@ try{
 } catch (Exception $e) {
     echo $e->getMessage();
 }
+
+/*Returns an array of headers: To, From, Subject, and Date for a message. Access member vars by typing $headers->Subject for example*/
+function getHeaders($service,$userId,$messageId){
+    $headers = (object)array('From' => NULL, 'To' => NULL, 'Subject' => NULL, 'Date' => NULL);
+    $opt_param_get = array();
+    $opt_param_get['format'] = 'full';
+    $message = $service->users_messages->get($userId,$messageId,$opt_param_get);
+    $headersArray = $message->getPayload()->getHeaders();
+    foreach($headersArray as $entry){
+        if($entry->name == "From"){
+            $headers->From = $entry->value;
+        }else if($entry->name == "To"){
+            $headers->To = $entry->value;
+        }else if($entry->name == "Subject"){
+            $headers->Subject = $entry->value;
+        }else if($entry->name == "Date"){
+            $headers->Date = $entry->value;
+        } 
+    }
+    return $headers;    
+    
+}
