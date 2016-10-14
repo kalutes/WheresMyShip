@@ -1,12 +1,28 @@
 <?php
     $dir = new DirectoryIterator(__DIR__."/messages");
     $trackingNums=array();
+    // $upsCount = 0;
+    // $fedexCount = 0;
+    $trackingNums['ups']=array();
+    $trackingNums['fedex']=array();
     foreach ($dir as $fileinfo) {
         if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$fileinfo->getFilename())) {
+            $file = __DIR__."/messages/".$fileinfo->getFilename();
+            //search each file for UPS tracking numbers
+            $arr = parseTrackingNumber($file,'ups');
+            foreach($arr as $e){
+                printf($e."\n");
+                array_push($trackingNums['ups'],$e);
+                $upsCount++;
+            }
 
-            $arr = parseTrackingNumber(__DIR__."/messages/".$fileinfo->getFilename());
-            foreach($arr as $e)
-            array_push($trackingNums,$e);
+            //search for FedEx tracking numbers
+            $arr = parseTrackingNumber($file,'fedex');
+            foreach($arr as $e){
+                printf($e."\n");
+                array_push($trackingNums['fedex'],$e);
+                $fedexCount++;
+            }
         }
     }
 print_r($trackingNums);
@@ -14,30 +30,39 @@ print_r($trackingNums);
 
 
 
-
-    function parseTrackingNumber($fileName)
+    function parseTrackingNumber($fileName, $shipper)
     {
-        $UPSTrackingNumbers= array();
+        $shipperCaps = strtoupper($shipper);
+        $trackingNumbers= array();
         $text = file_get_contents($fileName)
         or die("Unable to get contents of HTML File\n");
+        $regex=NULL;
+        switch($shipperCaps){
+            case 'UPS':
+                //UPS Case
+                $regex = '/[^a-zA-Z0-9](1Z|1z)([a-zA-z0-9]{16})/';
+                if(preg_match_all($regex,$text,$matches)){
+                    //var_dump($matches[0]);
+                    $trackingNumbers= getValidUPSArray($matches[0]);
 
-        //UPS Case
-        $regex = '/(1Z|1z)([a-zA-z0-9]{16})/';
-        if(preg_match_all($regex,$text,$matches)){
-            //var_dump($matches[0]);
-            $UPSTrackingNumbers= getValidUPSArray($matches[0]);
-
-            // print_r($UPSTrackingNumbers);
+                    // print_r($trackingNumbers);
+                }
+            else $trackNumbers=NULL;
+            break;
+            case 'FEDEX':
+                // FedEx case
+                $regex = '/[^a-zA-Z0-9][0-9][0-9]{14}(?=[^0-9])/';
+                if(preg_match_all($regex,$text,$matches)){
+                    $trackingNumbers= getValidFedExArray($matches[0]);
+                    // print_r($trackingNumbers);
+                }
+                else $trackNumbers=NULL;
+                break;
         }
-
-        //FedEx case
-        // $regex = '/(?![^0-9])[0-9]{15}(?=[^0-9])/';
-        // if(preg_match_all($regex,$text,$matches)){
-        //     $FedExTrackingNumbers= getValidFedExArray($matches[0]);
-        //     print_r($FedExTrackingNumbers);
-        // }
-        return $UPSTrackingNumbers;
-    }
+        // printf($shipper);
+        print_r($trackingNumbers);
+        return $trackingNumbers;
+}
 
 
     function checkUPSDigit($trackNumString){
@@ -80,6 +105,7 @@ print_r($trackingNums);
     function getValidUPSArray($array){
         $uniqueArray=array();
         foreach($array as $element){
+            $element = substr($element,1);
             if(!in_array($element,$uniqueArray) && checkUPSDigit($element))array_push($uniqueArray,$element);
         }
         return $uniqueArray;
@@ -87,6 +113,7 @@ print_r($trackingNums);
     function getValidFedExArray($array){
         $uniqueArray=array();
         foreach($array as $element){
+            $element = substr($element,1);
             if(!in_array($element,$uniqueArray) && checkFedExDigit($element))array_push($uniqueArray,$element);
         }
         return $uniqueArray;
