@@ -1,32 +1,44 @@
 <?php
     $dir = new DirectoryIterator(__DIR__."/messages");
+    $trackingNums=array();
     foreach ($dir as $fileinfo) {
         if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$fileinfo->getFilename())) {
 
-            parseTrackingNumber(__DIR__."/messages/".$fileinfo->getFilename());
+            $arr = parseTrackingNumber(__DIR__."/messages/".$fileinfo->getFilename());
+            foreach($arr as $e)
+            array_push($trackingNums,$e);
         }
     }
+print_r($trackingNums);
+
+
+
 
 
     function parseTrackingNumber($fileName)
     {
+        $UPSTrackingNumbers= array();
         $text = file_get_contents($fileName)
         or die("Unable to get contents of HTML File\n");
 
         //UPS Case
         $regex = '/(1Z|1z)([a-zA-z0-9]{16})/';
         if(preg_match_all($regex,$text,$matches)){
+            //var_dump($matches[0]);
             $UPSTrackingNumbers= getValidUPSArray($matches[0]);
-            print_r($UPSTrackingNumbers);
+
+            // print_r($UPSTrackingNumbers);
         }
 
         //FedEx case
-        $regex = '/(?![^0-9])[0-9]{15}(?=[^0-9])/';
-        if(preg_match_all($regex,$text,$matches)){
-            $FedExTrackingNumbers= getValidFedExArray($matches[0]);
-            print_r($FedExTrackingNumbers);
-        }
+        // $regex = '/(?![^0-9])[0-9]{15}(?=[^0-9])/';
+        // if(preg_match_all($regex,$text,$matches)){
+        //     $FedExTrackingNumbers= getValidFedExArray($matches[0]);
+        //     print_r($FedExTrackingNumbers);
+        // }
+        return $UPSTrackingNumbers;
     }
+
 
     function checkUPSDigit($trackNumString){
         //removes 1z
