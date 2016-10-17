@@ -1,0 +1,12 @@
+# OS junk
+.DS_Store
+[Tt]humbs.db
+
+# Composer and Google API
+composer.*
+quickstart.php
+vendor/*
+client_secret.json
+
+# VIM swap files
+*.swp
