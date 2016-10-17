@@ -18,7 +18,9 @@ if (php_sapi_name() != 'cli') {
 
 $client = getClient();
 $gmail = new Google_Service_Gmail($client);
-mkdir('messages');
+if (!file_exists('messages')) { 
+  mkdir('messages');
+}
 chdir('messages');
 $newestDate = 0;
 
