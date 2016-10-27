@@ -1,6 +1,12 @@
 <?php
+
+/**
+ * Takes in Email object (class)
+ * Will move email to appropriate folder.
+ */
+function selectEmails($email) {
 	if (!file_exists('messages')) {
-		throw new Exception('HTMLEmailGrabber.php has to be run first to fetch emails.');
+		throw new Exception('No emails has been fetch!');
 	}
 	chdir('messages');
 	$dir = new DirectoryIterator(__DIR__);
@@ -13,9 +19,10 @@
 	if (!file_exists('nonrelated')) {
 		mkdir('nonrelated');
 	}
+	$target = '*[Hh]as [Ss]hipped*';
 	foreach ($dir as $filedesc) {
 		if (!$filedesc->isDot() && file_exists($filedesc->getFilename())) {
-			if (/* Subject contains target phrases */) {
+			if (preg_match($target,$email->Subject) == 1 /* Subject contains target phrases */) {
 				// Move email to confirmed folder
 				rename($filedesc->getFilename(), 'confirmed/'.($filedesc->getFilename()));
 			} else if (/* Has a high score of target words */) {
@@ -27,4 +34,5 @@
 			}
 		}
 	}
+}
 ?>
