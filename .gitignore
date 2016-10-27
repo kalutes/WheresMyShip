@@ -1,3 +1,6 @@
+# This file itself
+# .gitignore
+
 # OS junk
 .DS_Store
 [Tt]humbs.db
@@ -9,4 +12,7 @@ vendor/*
 client_secret.json
 
 # VIM swap files
-*.swp
+.*.swp
+
+# Personal emails on tests
+messages/*

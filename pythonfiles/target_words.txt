@@ -1,6 +1,0 @@
-amazon
-ebay
-paypal
-ups
-usps
-fedex
