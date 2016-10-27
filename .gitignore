@@ -12,7 +12,7 @@ vendor/*
 client_secret.json
 
 # VIM swap files
-*.swp
+.*.swp
 
 # Personal emails on tests
 messages/*
