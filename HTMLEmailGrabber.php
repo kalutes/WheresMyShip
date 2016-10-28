@@ -18,17 +18,9 @@ if (php_sapi_name() != 'cli') {
 
 $client = getClient();
 $gmail = new Google_Service_Gmail($client);
-// if(!is_dir('messages')){
-//     mkdir('messages');
-// }
-// else{
-//     $files = glob(__DIR__.'/messages');
-//     foreach($files as $file){ // iterate files
-//         if(is_file($file))
-//             unlink($file); // delete file
-//     }
-// }
-mkdir('messages');
+if (!file_exists('messages')) {
+  mkdir('messages');
+}
 chdir('messages');
 $newestDate = 0;
 
@@ -159,6 +151,7 @@ function getOurHeaders($fullEmail){
             $headers->Subject = $entry->value;
         }else if($entry->name == "Date"){
             $headers->Date = $entry->value;
+
         }
     }
     return $headers;
@@ -267,11 +260,13 @@ function getNewEmails($initialGrab = false)
 					if(count($matches)) {
 						$search = array();
 						$replace = array();
+
 						// let's trasnform the CIDs as base64 attachements
 						foreach($matches[1] as $match) {
 							foreach($images_linked as $img_linked) {
 								foreach($img_linked['headers'] as $img_lnk) {
 									if( $img_lnk['name'] === 'Content-ID' || $img_lnk['name'] === 'Content-Id' || $img_lnk['name'] === 'X-Attachment-Id'){
+
 										if ($match === str_replace('>', '', str_replace('<', '', $img_lnk->value))
 												|| explode("@", $match)[0] === explode(".", $img_linked->filename)[0]
 												|| explode("@", $match)[0] === $img_linked->filename){
@@ -288,6 +283,7 @@ function getNewEmails($initialGrab = false)
 						}
 					}
 				}
+
 				// If we didn't find the body in the last parts,
 				// let's loop for the first parts (text-html only)
 				if(!$FOUND_BODY) {
@@ -302,6 +298,7 @@ function getNewEmails($initialGrab = false)
 				if(!$FOUND_BODY) {
 					$FOUND_BODY = decodeBody($body['data']);
 				}
+
 				// Last try: if we didn't find the body in the last parts,
 				// let's loop for the first parts (text-plain only)
 				if(!$FOUND_BODY) {
