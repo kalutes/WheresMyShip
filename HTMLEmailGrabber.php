@@ -18,7 +18,7 @@ if (php_sapi_name() != 'cli') {
 
 $client = getClient();
 $gmail = new Google_Service_Gmail($client);
-if (!file_exists('messages')) { 
+if (!file_exists('messages')) {
   mkdir('messages');
 }
 chdir('messages');
@@ -151,9 +151,10 @@ function getOurHeaders($fullEmail){
             $headers->Subject = $entry->value;
         }else if($entry->name == "Date"){
             $headers->Date = $entry->value;
-        } 
+
+        }
     }
-    return $headers;        
+    return $headers;
 }
 
 
@@ -259,12 +260,14 @@ function getNewEmails($initialGrab = false)
 					if(count($matches)) {
 						$search = array();
 						$replace = array();
-						// let's trasnform the CIDs as base64 attachements 
+
+						// let's trasnform the CIDs as base64 attachements
 						foreach($matches[1] as $match) {
 							foreach($images_linked as $img_linked) {
 								foreach($img_linked['headers'] as $img_lnk) {
 									if( $img_lnk['name'] === 'Content-ID' || $img_lnk['name'] === 'Content-Id' || $img_lnk['name'] === 'X-Attachment-Id'){
-										if ($match === str_replace('>', '', str_replace('<', '', $img_lnk->value)) 
+
+										if ($match === str_replace('>', '', str_replace('<', '', $img_lnk->value))
 												|| explode("@", $match)[0] === explode(".", $img_linked->filename)[0]
 												|| explode("@", $match)[0] === $img_linked->filename){
 											$search = "src=\"cid:$match\"";
@@ -280,7 +283,8 @@ function getNewEmails($initialGrab = false)
 						}
 					}
 				}
-				// If we didn't find the body in the last parts, 
+
+				// If we didn't find the body in the last parts,
 				// let's loop for the first parts (text-html only)
 				if(!$FOUND_BODY) {
 					foreach ($parts  as $part) {
@@ -294,7 +298,8 @@ function getNewEmails($initialGrab = false)
 				if(!$FOUND_BODY) {
 					$FOUND_BODY = decodeBody($body['data']);
 				}
-				// Last try: if we didn't find the body in the last parts, 
+
+				// Last try: if we didn't find the body in the last parts,
 				// let's loop for the first parts (text-plain only)
 				if(!$FOUND_BODY) {
 					foreach ($parts  as $part) {
