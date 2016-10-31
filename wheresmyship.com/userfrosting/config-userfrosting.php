@@ -40,8 +40,8 @@
                 'cache_limiter' => false
             ],
             'db'            =>  [
-                'db_host'  => 'wheresmyship.com',
-                'db_port'  => '330633063306330633063306330633063306330633063306330633063306330633063306330633063306330633063306330633063306330633063306330633063306', // Leave blank to use the default port for your database driver (eg. 3306 for MySQL)
+                'db_host'  => 'localhost',
+                'db_port'  => '', // Leave blank to use the default port for your database driver (eg. 3306 for MySQL)
                 'db_name'  => 'userfrosting',
                 'db_user'  => 'userfrosting_adm',
                 'db_pass'  => 'wheresmyship',
