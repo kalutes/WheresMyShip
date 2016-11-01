@@ -1,0 +1,24 @@
+{% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {# Set page properties (page.*) here. #}
+            {% block page %}
+                {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+                but BEFORE the page itself is rendered. #}    
+                {% set page = page | merge({
+                    "title"       : "Dashboard",
+                    "description" : "Your user dashboard."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block content %}
+                <h1>User Groups</h1>
+                <ul class="list-group">
+                {% for group in groups %}
+                    <li class="list-group-item">
+                          <i class="{{group.icon}} fa-fw"></i> {{group.name}}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endblock %}
