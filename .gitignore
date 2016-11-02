@@ -1,11 +1,12 @@
 # This file itself
-# .gitignore
+.gitignore
 
 # OS junk
 .DS_Store
 [Tt]humbs.db
 
 # Composer and Google API
+composer.phar
 quickstart.php
 vendor/*
 client_secret.json

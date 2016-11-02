@@ -1,5 +1,7 @@
 <?
 
+require(__DIR__.'/UPS_API/UPSTrack.php');
+
 class Shipment {
 	private $emailSource;
 	private $trackingNumber;
@@ -11,6 +13,14 @@ class Shipment {
 	private $currentLocation;
 	private $ETA;
 	private $status;
+
+
+	/*
+	 * Setter function
+	 */
+	function setTrackingNumber($num) {
+		$this->trackingNumber = $num;
+	}
 
 	/*
 	 * Accessors function
@@ -61,7 +71,8 @@ class Shipment {
 	 * @return error code: (-1) for API issues, (0) for other errors, (0) for success
 	 */
 	function update() {
-		
+		$returned = upsTrack($this->trackingNumber);
+		print_r($returned);
 	}
 }
 
