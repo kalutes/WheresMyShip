@@ -6,7 +6,6 @@
 [Tt]humbs.db
 
 # Composer and Google API
-composer.*
 quickstart.php
 vendor/*
 client_secret.json
