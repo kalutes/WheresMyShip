@@ -69,10 +69,13 @@ class Shipment {
 	/*
 	 * Update function
 	 * @return error code: (-1) for API issues, (0) for other errors, (0) for success
+	 * TODO: complete this function.
 	 */
 	function update() {
 		$returned = upsTrack($this->trackingNumber);
-		print_r($returned);
+		$this->origin = $returned[TRACKRESPONSE][SHIPMENT][SHIPPER];
+		$this->destination = $returned[TRACKRESPONSE][SHIPMENT][SHIPTO];
+		$this->carrier = 'UPS';
 	}
 }
 
