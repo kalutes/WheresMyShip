@@ -8,9 +8,9 @@ define('PASSWORD', __DIR__.'/Password.txt');
 function upsTrack($trackingNumber) {
 $data ="<?xml version=\"1.0\"?>
         <AccessRequest xml:lang='en-US'>
-                <AccessLicenseNumber>file_get_contents(API_KEY)</AccessLicenseNumber>
-                <UserId>file_get_contents(USER_ID)</UserId>
-                <Password>file_get_contents(PASSWORD)</Password>
+                <AccessLicenseNumber>".file_get_contents(API_KEY)."</AccessLicenseNumber>
+                <UserId>".file_get_contents(USER_ID)."</UserId>
+                <Password>".file_get_contents(PASSWORD)."</Password>
         </AccessRequest>
         <?xml version=\"1.0\"?>
         <TrackRequest>

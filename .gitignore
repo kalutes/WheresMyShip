@@ -16,3 +16,8 @@ client_secret.json
 
 # Personal emails on tests
 messages/*
+
+# API Key, User ID, Password
+API_*.txt
+User_ID.txt
+Password.txt
