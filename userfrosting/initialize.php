@@ -108,6 +108,12 @@ $table_group = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] .
     "icon"
 ]);
 
+$table_shipments = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "shipments", [
+    "id",
+    "userid",
+    "trackingNumber"
+]);
+
 $table_group_user = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "group_user");
 $table_configuration = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "configuration");
 $table_authorize_user = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "authorize_user");
@@ -120,6 +126,7 @@ $table_authorize_group = new \UserFrosting\DatabaseTable($app->config('db')['db_
 \UserFrosting\Database::setSchemaTable("configuration", $table_configuration);
 \UserFrosting\Database::setSchemaTable("authorize_user", $table_authorize_user);
 \UserFrosting\Database::setSchemaTable("authorize_group", $table_authorize_group);
+\UserFrosting\Database::setSchemaTable("shipments", $table_shipments);
 
 // Info for RememberMe table
 $app->remember_me_table = [
