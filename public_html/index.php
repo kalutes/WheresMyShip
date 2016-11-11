@@ -61,23 +61,15 @@
         
         $app->render('dashboard.twig', []);          
     });
-
-    $app->get('/linkaccount/?', function() use ($app) {
-        if(!$app->user->checkAccess('uri_linkaccount')){
-          $app->notFound();
-        }
-        
-        $app->render('shipments.twig', []);
-    ]);
-
-    $app->get('/account/groups/?', function () use ($app) {   
-	if(!$app->user->checkAccess('uri_account-groups')){
-		$app->notFound();
-	}        
-
-	$app->render('account-groups.twig', ['groups' => $app->user->getGroups()]);
-    });
     
+    $app->get('/linkaccount/?', function () use ($app) {
+      if(!$app->user->checkAccess('uri_linkaccount')){
+        $app->notFound();
+      }
+      
+      $app->render('linkaccount.twig', []);
+    });
+
     $app->get('/zerg/?', function () use ($app) {    
         // Access-controlled page
         if (!$app->user->checkAccess('uri_zerg')){

@@ -30,11 +30,6 @@
             <a href="{{site.uri.public}}/users/zerglings"><i class="sc sc-zergling fa-fw"></i> Zerglings</a>
         </li>
         {% endif %}
-	{% if checkAccess('uri_account-groups') %}
-            <li>
-              <a href="{{site.uri.public}}/account/groups"><i class="fa fa-tags fa-fw"></i> My Groups</a>
-            </li>
-        {% endif %}
         {% if checkAccess('uri_site_settings') or checkAccess('uri_manage_groups') %}
         <li>
             <a href="#"><i class="fa fa-wrench fa-fw"></i> {{ translate("MENU_CONFIGURATION") }}<span class="fa arrow"></span></a>
