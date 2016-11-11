@@ -1,5 +1,5 @@
 <?
-
+require(__DIR__.'/CarrierInfo.php');
 require(__DIR__.'/UPS_API/UPSTrack.php');
 
 class Shipment {
@@ -75,8 +75,9 @@ class Shipment {
 		$returned = upsTrack($this->trackingNumber);
 		$this->origin = $returned[TRACKRESPONSE][SHIPMENT][SHIPPER];
 		$this->destination = $returned[TRACKRESPONSE][SHIPMENT][SHIPTO];
-		$this->carrier = 'UPS';
+		$carrier = new CarrierInfo;
+		$this->carrier = $carrier->UPS();
+		print_r($this);
 	}
 }
-
 ?>
