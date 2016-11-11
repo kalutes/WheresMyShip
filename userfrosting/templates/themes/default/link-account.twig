@@ -1,0 +1,14 @@
+{% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Link Google Account",
+                    "description" : "A page used to link your Gmail account to WheresMyShip."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block content %}
+                <h1>The user's ID is {{user.id}}.</h1>
+            {% endblock %}

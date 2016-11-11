@@ -62,6 +62,14 @@
         $app->render('dashboard.twig', []);          
     });
 
+    $app->get('/linkaccount/?', function() use ($app) {
+        if(!$app->user->checkAccess('uri_linkaccount')){
+          $app->notFound();
+        }
+        
+        $app->render('shipments.twig', []);
+    ]);
+
     $app->get('/account/groups/?', function () use ($app) {   
 	if(!$app->user->checkAccess('uri_account-groups')){
 		$app->notFound();
