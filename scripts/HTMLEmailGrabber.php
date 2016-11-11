@@ -1,6 +1,7 @@
 
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+require(__DIR__.'/PotentialEmails.php');
 
 
 define('APPLICATION_NAME', 'Gmail API PHP Quickstart');
@@ -343,6 +344,9 @@ function getNewEmails($initialGrab = false)
 
 $timerDate = time();
 getNewEmails(true);
+chdir('..');
+selectEmails();
+chdir('messages');
 print_r("Waiting on new Emails...\r\n");
 while(true)
 {
@@ -350,5 +354,8 @@ while(true)
 	{
 		$timerDate = time();
 		getNewEmails();
+		chdir('..');
+		selectEmails();
+		chdir('messages');
 	}
 }

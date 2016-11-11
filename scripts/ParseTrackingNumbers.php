@@ -1,4 +1,16 @@
 <?php
+    /*$servername = "localhost";
+    $username = "userfrosting_adm";
+    $password = "wheresmyship";
+    $dbname = "userfrosting";
+$id = 1; //must be changed to generic user id
+$trackingNumber;
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username. $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$stmt = $conn->prepare("INSERT INTO shipments (userid, trackingNumber) VALUES (:userid, :trackingNumber)");
+		$stmt->bindParam(':userid', $id);
+		$stmt->bindParam(':trackingNumber', $trackingNumber);*/
+
     $dir = new DirectoryIterator(__DIR__."/messages");
     $trackingNums=array();
     // $upsCount = 0;
@@ -12,7 +24,11 @@
             $arr = parseTrackingNumber($file,'ups');
             foreach($arr as $e){
                 printf($e."\n");
-                array_push($trackingNums['ups'],$e);
+
+	/*	$trackingNumber = $e;
+		$stmt->execute();*/
+
+		array_push($trackingNums['ups'],$e);
                 $upsCount++;
             }
 

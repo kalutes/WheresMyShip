@@ -1,6 +1,5 @@
 <?php
 
-selectEmails();
 
 /**
  * Takes in Email object (class)
