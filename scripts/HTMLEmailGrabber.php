@@ -347,6 +347,7 @@ $timerDate = time();
 getNewEmails(true);
 chdir('..');
 selectEmails();
+chdir('..');
 addTrackingNumbers();
 chdir('messages');
 print_r("Waiting on new Emails...\r\n");
@@ -358,6 +359,7 @@ while(true)
 		getNewEmails();
 		chdir('..');
 		selectEmails();
+		chdir('..');
 		addTrackingNumbers();
 		chdir('messages');
 	}
