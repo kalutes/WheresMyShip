@@ -2,6 +2,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 require(__DIR__.'/PotentialEmails.php');
+require(__DIR__.'/ParseTrackingNumbers.php');
 
 
 define('APPLICATION_NAME', 'Gmail API PHP Quickstart');
@@ -346,6 +347,8 @@ $timerDate = time();
 getNewEmails(true);
 chdir('..');
 selectEmails();
+chdir('..');
+addTrackingNumbers();
 chdir('messages');
 print_r("Waiting on new Emails...\r\n");
 while(true)
@@ -356,6 +359,8 @@ while(true)
 		getNewEmails();
 		chdir('..');
 		selectEmails();
+		chdir('..');
+		addTrackingNumbers();
 		chdir('messages');
 	}
 }
