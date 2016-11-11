@@ -1,18 +1,34 @@
 <?php
-    $dir = new DirectoryIterator(__DIR__."/messages");
+    /*$servername = "localhost";
+    $username = "userfrosting_adm";
+    $password = "wheresmyship";
+    $dbname = "userfrosting";
+$id = 1; //must be changed to generic user id
+$trackingNumber;
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username. $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$stmt = $conn->prepare("INSERT INTO shipments (userid, trackingNumber) VALUES (:userid, :trackingNumber)");
+		$stmt->bindParam(':userid', $id);
+		$stmt->bindParam(':trackingNumber', $trackingNumber);*/
+function addTrackingNumbers(){
+    $dir = new DirectoryIterator(__DIR__."/messages/confirmed");
     $trackingNums=array();
     // $upsCount = 0;
     // $fedexCount = 0;
     $trackingNums['ups']=array();
     $trackingNums['fedex']=array();
     foreach ($dir as $fileinfo) {
-        if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$fileinfo->getFilename())) {
-            $file = __DIR__."/messages/".$fileinfo->getFilename();
+        if (!$fileinfo->isDot() && is_file(__DIR__."/messages/confirmed".$fileinfo->getFilename())) {
+            $file = __DIR__."/messages/confirmed".$fileinfo->getFilename();
             //search each file for UPS tracking numbers
             $arr = parseTrackingNumber($file,'ups');
             foreach($arr as $e){
                 printf($e."\n");
-                array_push($trackingNums['ups'],$e);
+
+	/*	$trackingNumber = $e;
+		$stmt->execute();*/
+
+		array_push($trackingNums['ups'],$e);
                 $upsCount++;
             }
 
@@ -26,6 +42,7 @@
         }
     }
 print_r($trackingNums);
+}
 
 
 

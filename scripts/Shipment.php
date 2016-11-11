@@ -73,11 +73,12 @@ class Shipment {
 	 */
 	function update() {
 		$returned = upsTrack($this->trackingNumber);
+		print_r($returned);
 		$this->origin = $returned['TRACKRESPONSE']['SHIPMENT']['SHIPPER'];
 		$this->destination = $returned['TRACKRESPONSE']['SHIPMENT']['SHIPTO'];
 		$carrier = new CarrierInfo;
 		$this->carrier = $carrier->UPS();
-		print_r($this);
+		//print_r($this);
 	}
 }
 ?>
