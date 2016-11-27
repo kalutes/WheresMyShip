@@ -346,8 +346,8 @@ function getNewEmails($initialGrab = false)
 $timerDate = time();
 getNewEmails(true);
 chdir('..');
-selectEmails();
-chdir('..');
+//selectEmails();
+//chdir('..');
 addTrackingNumbers();
 chdir('messages');
 print_r("Waiting on new Emails...\r\n");
@@ -357,8 +357,8 @@ while(true)
 	{
 		$timerDate = time();
 		getNewEmails();
-		chdir('..');
-		selectEmails();
+		//chdir('..');
+		//selectEmails();
 		chdir('..');
 		addTrackingNumbers();
 		chdir('messages');
