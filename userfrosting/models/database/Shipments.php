@@ -8,9 +8,10 @@ class Shipments extends UFModel {
 
     protected static $_table_id = "shipments";
 
-    public function trackingNumbers(){
-        $link_table = Database::getSchemaTable('shipments')->trackingNumber;
-        return $link_table;
+    public function __construct($properties = []) {
+        parent::__construct($properties);
     }
+
+
 
 }

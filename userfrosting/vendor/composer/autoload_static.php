@@ -15,121 +15,121 @@ class ComposerStaticInitc52ebfbf30fadb1cecddae09d70e0ca9
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'Wikimedia\\Composer\\' => 19,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
             'Stringy\\' => 8,
             'Slim\\Views\\' => 11,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\Csv\\' => 11,
         ),
-        'I' => 
+        'I' =>
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
         ),
-        'C' => 
+        'C' =>
         array (
             'Carbon\\' => 7,
         ),
-        'B' => 
+        'B' =>
         array (
             'Birke\\' => 6,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Wikimedia\\Composer\\' => 
+        'Wikimedia\\Composer\\' =>
         array (
             0 => __DIR__ . '/..' . '/wikimedia/composer-merge-plugin/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Component\\Translation\\' => 
+        'Symfony\\Component\\Translation\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
-        'Stringy\\' => 
+        'Stringy\\' =>
         array (
             0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
         ),
-        'Slim\\Views\\' => 
+        'Slim\\Views\\' =>
         array (
             0 => __DIR__ . '/..' . '/slim/views',
         ),
-        'League\\Csv\\' => 
+        'League\\Csv\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
         ),
-        'Illuminate\\Support\\' => 
+        'Illuminate\\Support\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/support',
         ),
-        'Illuminate\\Database\\' => 
+        'Illuminate\\Database\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/database',
         ),
-        'Illuminate\\Contracts\\' => 
+        'Illuminate\\Contracts\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/contracts',
         ),
-        'Illuminate\\Container\\' => 
+        'Illuminate\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
         ),
-        'Carbon\\' => 
+        'Carbon\\' =>
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'Birke\\' => 
+        'Birke\\' =>
         array (
             0 => __DIR__ . '/..' . '/birke/rememberme/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'V' => 
+        'V' =>
         array (
-            'Valitron' => 
+            'Valitron' =>
             array (
                 0 => __DIR__ . '/..' . '/vlucas/valitron/src',
             ),
         ),
-        'T' => 
+        'T' =>
         array (
-            'Twig_' => 
+            'Twig_' =>
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
-        'S' => 
+        'S' =>
         array (
-            'Slim' => 
+            'Slim' =>
             array (
                 0 => __DIR__ . '/..' . '/slim/slim',
             ),
         ),
-        'H' => 
+        'H' =>
         array (
-            'HTMLPurifier' => 
+            'HTMLPurifier' =>
             array (
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
             ),
         ),
-        'D' => 
+        'D' =>
         array (
-            'Doctrine\\Common\\Inflector\\' => 
+            'Doctrine\\Common\\Inflector\\' =>
             array (
                 0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
@@ -174,6 +174,7 @@ class ComposerStaticInitc52ebfbf30fadb1cecddae09d70e0ca9
         'UserFrosting\\Group' => __DIR__ . '/../..' . '/models/database/Group.php',
         'UserFrosting\\GroupAuth' => __DIR__ . '/../..' . '/models/database/GroupAuth.php',
         'UserFrosting\\GroupController' => __DIR__ . '/../..' . '/controllers/GroupController.php',
+        'UserFrosting\\ShipmentsController' => __DIR__ . '/../..' . '/controllers/ShipmentsController.php',
         'UserFrosting\\GroupLoader' => __DIR__ . '/../..' . '/models/database/GroupLoader.php',
         'UserFrosting\\InstallController' => __DIR__ . '/../..' . '/controllers/InstallController.php',
         'UserFrosting\\Notification' => __DIR__ . '/../..' . '/models/notify/Notification.php',

@@ -109,7 +109,6 @@ $table_group = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] .
 ]);
 
 $table_shipments = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "shipments", [
-    "id",
     "userid",
     "trackingNumber"
 ]);

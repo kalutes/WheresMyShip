@@ -3,8 +3,8 @@
 
          {% block page %}
              {% set page = page | merge({
-                 "title"       : "Account Groups",
-                 "description" : "A list of the groups to which you belong."
+                 "title"       : "Shipments",
+                 "description" : "A list of your Shipments."
              }) %}
              {{ parent() }}
          {% endblock %}
@@ -17,6 +17,6 @@
             <input type="text" class="form-control" id="trackingnumber" style="width:300px">
         </div>
 
-        
+
 
         {% endblock %}

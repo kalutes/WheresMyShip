@@ -62,9 +62,6 @@
         $app->render('dashboard.twig', []);
     });
 
-    $app->get('/shipments/?', function () use ($app) {
-             $app->render('shipments.twig', []);
-           });
 
     $app->get('/linkaccount/?', function () use ($app) {
       if(!$app->user->checkAccess('uri_linkaccount')){
@@ -83,6 +80,11 @@
         $app->render('users/zerg.twig');
     });
 
+    $app->get('/shipments/?', function () use ($app) {
+        $controller = new UF\ShipmentsController($app);
+        $trackingNumbers = $controller->trackingNumbers();
+        // $app->render('shipments/shipments.twig',[]);
+    });
     /********** ACCOUNT MANAGEMENT INTERFACE **********/
 
     $app->get('/account/:action/?', function ($action) use ($app) {

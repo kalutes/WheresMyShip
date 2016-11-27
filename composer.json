@@ -1,12 +1,5 @@
 {
-  "require" : {
-    "silex/silex": "^1.3",
-    "monolog/monolog": "^1.4",
-    "twig/twig": "^1.8",
-    "symfony/twig-bridge": "^2",
-    "google/apiclient": "^2.0"
-  },
-  "require-dev": {
-    "heroku/heroku-buildpack-php": "*"
-  }
+    "require": {
+        "google/apiclient": "^2.0"
+    }
 }

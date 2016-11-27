@@ -43,6 +43,7 @@ return array(
     'UserFrosting\\Group' => $baseDir . '/models/database/Group.php',
     'UserFrosting\\GroupAuth' => $baseDir . '/models/database/GroupAuth.php',
     'UserFrosting\\GroupController' => $baseDir . '/controllers/GroupController.php',
+    'UserFrosting\\ShipmentsController' => $baseDir . '/controllers/ShipmentsController.php',
     'UserFrosting\\GroupLoader' => $baseDir . '/models/database/GroupLoader.php',
     'UserFrosting\\InstallController' => $baseDir . '/controllers/InstallController.php',
     'UserFrosting\\Notification' => $baseDir . '/models/notify/Notification.php',
