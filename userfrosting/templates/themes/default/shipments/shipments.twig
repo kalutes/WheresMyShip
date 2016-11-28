@@ -13,9 +13,17 @@
          <h1>Your Shipments:</h1>
          <br>
          <div class="form-group">
-            <label for="trackingnumber">Add Tracking Number:</label>
-            <input type="text" class="form-control" id="trackingnumber" style="width:300px">
-        </div>
+             <label for="trackingnumber">Add Tracking Number:</label>
+             <input type="text" class="form-control" id="trackingnumber" style="width:300px">
+         </div>
+         <table style="border-collapse:collapse">
+         {% for trackingNumber in trackingNumbers %}
+         <tr>
+             <td>{{trackingNumber.id}}.</td>
+             <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
+        </tr>
+         {% endfor %}
+        </table>
 
 
 

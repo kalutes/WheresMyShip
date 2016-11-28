@@ -18,10 +18,9 @@ class ShipmentsController extends \UserFrosting\BaseController {
     }
 
     public function trackingNumbers(){
-        //  $trackingNumbers = Shipments::get();
+         $trackingNumbers = Shipments::get();
          $this->_app->render('shipments/shipments.twig',[
-            // "trackingNumber" => $trackingNumber
-
+            "trackingNumbers" => $trackingNumbers
         ]);
     }
 

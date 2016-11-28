@@ -4,7 +4,7 @@
 *
 * @license http://opensource.org/licenses/MIT
 * @link https://github.com/thephpleague/csv/
-* @version 8.1.0
+* @version 8.1.1
 * @package League.csv
 *
 * For the full copyright and license information, please view the LICENSE
@@ -12,7 +12,7 @@
 */
 namespace League\Csv\Modifier;
 
-use ArrayObject;
+use ArrayIterator;
 use CallbackFilterIterator;
 use Iterator;
 use LimitIterator;
@@ -78,7 +78,7 @@ trait QueryFilter
     /**
      * @inheritdoc
      */
-    abstract public function getInputBom();
+    abstract public function getInputBOM();
 
     /**
      * Set LimitIterator Offset
@@ -202,7 +202,7 @@ trait QueryFilter
      */
     protected function isBomStrippable()
     {
-        return !empty($this->getInputBom()) && $this->strip_bom;
+        return !empty($this->getInputBOM()) && $this->strip_bom;
     }
 
     /**
@@ -214,7 +214,7 @@ trait QueryFilter
      */
     protected function getStripBomIterator(Iterator $iterator)
     {
-        $bom_length = mb_strlen($this->getInputBom());
+        $bom_length = mb_strlen($this->getInputBOM());
         $enclosure = $this->getEnclosure();
         $strip_bom = function ($row, $index) use ($bom_length, $enclosure) {
             if (0 != $index) {
@@ -222,7 +222,7 @@ trait QueryFilter
             }
 
             $row[0] = mb_substr($row[0], $bom_length);
-            if ($row[0][0] === $enclosure && mb_substr($row[0], -1, 1) === $enclosure) {
+            if (mb_substr($row[0], 0, 1) === $enclosure && mb_substr($row[0], -1, 1) === $enclosure) {
                 $row[0] = mb_substr($row[0], 1, -1);
             }
 
@@ -263,7 +263,7 @@ trait QueryFilter
             return $iterator;
         }
 
-        $obj = new ArrayObject(iterator_to_array($iterator));
+        $obj = new ArrayIterator(iterator_to_array($iterator));
         $obj->uasort(function ($row_a, $row_b) {
             $res = 0;
             foreach ($this->iterator_sort_by as $compare) {
@@ -276,7 +276,7 @@ trait QueryFilter
         });
         $this->iterator_sort_by = [];
 
-        return $obj->getIterator();
+        return $obj;
     }
 
     /**

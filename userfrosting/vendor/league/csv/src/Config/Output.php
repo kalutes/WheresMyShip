@@ -4,7 +4,7 @@
 *
 * @license http://opensource.org/licenses/MIT
 * @link https://github.com/thephpleague/csv/
-* @version 8.1.0
+* @version 8.1.1
 * @package League.csv
 *
 * For the full copyright and license information, please view the LICENSE
@@ -103,7 +103,7 @@ trait Output
      */
     public function getEncodingFrom()
     {
-        return $this->input_encoding;
+        return $this->getInputEncoding();
     }
 
     /**
@@ -179,7 +179,7 @@ trait Output
     {
         if (null !== $filename) {
             $filename = filter_var($filename, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-            header('Content-Type: application/octet-stream');
+            header('Content-Type: text/csv');
             header('Content-Transfer-Encoding: binary');
             header("Content-Disposition: attachment; filename=\"$filename\"");
         }

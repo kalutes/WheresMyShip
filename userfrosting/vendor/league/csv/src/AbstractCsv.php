@@ -4,7 +4,7 @@
 *
 * @license http://opensource.org/licenses/MIT
 * @link https://github.com/thephpleague/csv/
-* @version 8.1.0
+* @version 8.1.1
 * @package League.csv
 *
 * For the full copyright and license information, please view the LICENSE
@@ -63,7 +63,7 @@ abstract class AbstractCsv implements JsonSerializable, IteratorAggregate
     /**
      * UTF-32 LE BOM sequence
      */
-    const BOM_UTF32_LE = "\x00\x00\xFF\xFE";
+    const BOM_UTF32_LE = "\xFF\xFE\x00\x00";
 
     /**
      * The constructor path
@@ -115,7 +115,15 @@ abstract class AbstractCsv implements JsonSerializable, IteratorAggregate
      */
     public static function createFromFileObject(SplFileObject $file)
     {
-        return new static($file);
+        $csv = new static($file);
+        $controls = $file->getCsvControl();
+        $csv->setDelimiter($controls[0]);
+        $csv->setEnclosure($controls[1]);
+        if (isset($controls[2])) {
+            $csv->setEscape($controls[2]);
+        }
+
+        return $csv;
     }
 
     /**
