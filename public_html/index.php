@@ -1,5 +1,36 @@
 <?php
-    // This is the path to initialize.php, your site's gateway to the rest of the UF codebase!  Make sure that it is correct!
+ //GOOGLE AUTH CODE
+    require_once __DIR__ . '/../vendor/autoload.php';
+    define('CREDENTIALS_PATH', '~/.credentials/gmail-php-quickstart.json');
+    define('CLIENT_SECRET_PATH', __DIR__ . '/client_secret.json');
+    define('SCOPES', implode(' ', array(Google_Service_Gmail::GMAIL_READONLY)));
+    function getClient() {
+      $client = new Google_Client();
+      $client->setApplicationName('WheresMyShip');
+      $client->setScopes(SCOPES);
+      $client->setAuthConfig(CLIENT_SECRET_PATH);
+      $client->setAccessType('offline');
+
+      //TODO: ADD CODE TO GRAB AUTH CODE IN JSON FORMAT FROM THE DATABASE FOR THE CURRENTLY LOGGED IN USER
+
+      $client->setAccessToken($accessToken);
+      if($client->isAccessTokenExpired()) {
+        $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+        //TODO ADD CODE TO PUSH THE REFRESHED ACCESS TOKEN TO THE DATABASE FOR THE CURRENT USER
+      }
+      return $client;
+    }
+    
+    function expandHomeDirectory($path) {
+      $homeDirectory = getenv('HOME');
+      if(empty($homeDirectory)) {
+        $homeDirectory = getenv('HOMEDRIVE') . getenv('HOMEPATH');
+      }
+      return str_replace('~', realpath($homeDirectory), $path);
+    }
+    //END GOOGLE AUTH CODE   
+
+// This is the path to initialize.php, your site's gateway to the rest of the UF codebase!  Make sure that it is correct!
     $init_path = "../userfrosting/initialize.php";
 
     // This if-block just checks that the path for initialize.php is correct.  Remove this once you know what you're doing.
@@ -67,9 +98,19 @@
       if(!$app->user->checkAccess('uri_linkaccount')){
         $app->notFound();
       }
-
       $app->render('linkaccount.twig', []);
     });
+
+    $app->post('/linkaccount/?', function () use ($app) {
+      $myfile = fopen("test.txt", "w");
+      fwrite($myfile, "hello");
+      fclose($myfile);
+      $post = $this->_app->request->post();
+      //GOOGLE USER AUTH CODE
+      //TODO ADD CODE TO STORE AUTH CODE IN DATABASE FOR LOGGED IN USER
+      //END GOOGLE USER AUTH CODE
+    });
+
 
     $app->get('/zerg/?', function () use ($app) {
         // Access-controlled page
