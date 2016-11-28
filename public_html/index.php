@@ -81,6 +81,9 @@
     });
 
     $app->get('/shipments/?', function () use ($app) {
+        if (!$app->user->checkAccess('uri_shipments')){
+                  $app->notFound();
+              }
         $controller = new UF\ShipmentsController($app);
         return $controller->trackingNumbers();
         // $app->render('shipments/shipments.twig',[]);
