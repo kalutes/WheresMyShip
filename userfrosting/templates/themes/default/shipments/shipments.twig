@@ -17,11 +17,13 @@
              <input type="text" class="form-control" id="trackingnumber" style="width:300px">
          </div>
          <table style="border-collapse:collapse">
+        {% set increment = 1 %}
          {% for trackingNumber in trackingNumbers %}
          <tr>
-             <td>{{trackingNumber.id}}.</td>
+             <td>{{increment}}.</td>
              <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
         </tr>
+        {% set increment = increment + 1 %}
          {% endfor %}
         </table>
 
