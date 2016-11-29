@@ -103,6 +103,8 @@
 
     $app->post('/linkaccount/?', function () use ($app) {
       $post = $app->request->post();
+      $app->user->googleauth = $post['data'];
+      $app->user->save();
       //GOOGLE USER AUTH CODE
       //TODO ADD CODE TO STORE AUTH CODE IN DATABASE FOR LOGGED IN USER
       //END GOOGLE USER AUTH CODE
