@@ -102,10 +102,7 @@
     });
 
     $app->post('/linkaccount/?', function () use ($app) {
-      $myfile = fopen("test.txt", "w");
-      fwrite($myfile, "hello");
-      fclose($myfile);
-      $post = $this->_app->request->post();
+      $post = $app->request->post();
       //GOOGLE USER AUTH CODE
       //TODO ADD CODE TO STORE AUTH CODE IN DATABASE FOR LOGGED IN USER
       //END GOOGLE USER AUTH CODE
