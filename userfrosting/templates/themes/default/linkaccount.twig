@@ -3,8 +3,8 @@
 
             {% block page %}   
                 {% set page = page | merge({
-                    "title"       : "Account Groups",
-                    "description" : "A list of the groups to which you belong."
+                    "title"       : "Link Account",
+                    "description" : "A page to link your gmail account."
                 }) %}
                 {{ parent() }}
             {% endblock %}
@@ -48,6 +48,7 @@
 					data: toPost,
 					dataType: "json"
 				});
+				window.location.href="linkaccount";
 			} else {
 				//error
 			}
@@ -56,7 +57,7 @@
 	    {% endblock %}
 
 	    {% block content %}
-              
-		<button id="signinButton">Authorize</button>
+                <h1>Click the button below to link your Gmail account.</h1>
+		<button id="signinButton">Link Account</button>
     		
             {% endblock %}

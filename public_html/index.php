@@ -98,7 +98,17 @@
       if(!$app->user->checkAccess('uri_linkaccount')){
         $app->notFound();
       }
-      $app->render('linkaccount.twig', []);
+      
+      if($app->user->googleauth)
+      {
+        //user has already linked a gmail account
+        $app->render('accountLinked.twig', []);
+      }
+      else
+      {
+	//user need to still link account
+        $app->render('linkaccount.twig', []);
+      }
     });
 
     $app->post('/linkaccount/?', function () use ($app) {
@@ -112,9 +122,21 @@
       $accessToken = $client->fetchAccessTokenWithAuthCode($post['data']);
       $app->user->googleauth = json_encode($accessToken, true);
       $app->user->save();
+      $ms = $app->alerts;
+      $ms->addMessageTranslated("success", "Account successfully linked.", $post);
       //GOOGLE USER AUTH CODE
       //TODO ADD CODE TO STORE AUTH CODE IN DATABASE FOR LOGGED IN USER
       //END GOOGLE USER AUTH CODE
+    });
+
+   $app->post('/removeAccount/?', function () use ($app) {
+      $post = $app->request->post();
+      $app->user->googleauth = null;
+      $app->user->firstgrab = 1;
+      $app->user->lastemaildate = 0;
+      $app->user->save();
+      $ms = $app->alerts;
+      $ms->addMessageTranslated("success", "Account successfully removed", $post);
     });
 
 
