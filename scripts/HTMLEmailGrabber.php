@@ -50,7 +50,6 @@ function getClient($googleAuth) {
   //$accessToken = $client->fetchAccessTokenWithAuthCode($googleAuth);
   //$conn->prepare("UPDATE uf_user SET googleauth = ? WHERE id = ?")->execute([json_encode($accessToken), $currentID]);
   $client->setAccessToken(json_decode($googleAuth, true));
-
   // Refresh the token if it's expired.
   if ($client->isAccessTokenExpired()) {
     $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
@@ -338,23 +337,26 @@ $trackingNumber;
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $currentID = 0;
-$query = $conn->query('SELECT * FROM uf_user');
-foreach ($query as $row)
-{	
-	$currentID = $row['id'];
-	if (!file_exists($row['id'])) {
-  		mkdir($row['id']);
-	}
-	chdir($row['id']);
-	if(!$row['googleauth'])
-	{
-		//user hasn't added an email account, ignore
-	}
-	else
+while(true)
+{
+	$query = $conn->query('SELECT * FROM uf_user');
+	foreach ($query as $row)
 	{	
-		$timerDate = time();
-		print_r("Grabbing Emails for user" . $row['id'] . "\n");
-		getNewEmails($row['firstgrab'], $row['lastemaildate'], $row['googleauth']);
+		$currentID = $row['id'];
+		if (!file_exists($row['id'])) {
+  			mkdir($row['id']);
+		}
+		chdir($row['id']);
+		if(!$row['googleauth'])
+		{
+			//user hasn't added an email account, ignore
+		}
+		else
+		{	
+			$timerDate = time();
+			print_r("Grabbing Emails for user " . $row['id'] . "\n");
+			getNewEmails($row['firstgrab'], $row['lastemaildate'], $row['googleauth']);
+		}
+		chdir("..");
 	}
-	chdir("..");
 }	
