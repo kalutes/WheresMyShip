@@ -1,7 +1,6 @@
 
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-require(__DIR__.'/PotentialEmails.php');
 require(__DIR__.'/ParseTrackingNumbers.php');
 
 
