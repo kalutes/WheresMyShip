@@ -103,7 +103,14 @@
 
     $app->post('/linkaccount/?', function () use ($app) {
       $post = $app->request->post();
-      $app->user->googleauth = $post['data'];
+      $client = new Google_Client();
+      $client->setApplicationName('WheresMyShip');
+      $client->setScopes(SCOPES);
+      $client->setAuthConfig(CLIENT_SECRET_PATH);
+      $client->setAccessType('offline');
+      $client->setRedirectUri('postmessage');
+      $accessToken = $client->fetchAccessTokenWithAuthCode($post['data']);
+      $app->user->googleauth = json_encode($accessToken, true);
       $app->user->save();
       //GOOGLE USER AUTH CODE
       //TODO ADD CODE TO STORE AUTH CODE IN DATABASE FOR LOGGED IN USER
