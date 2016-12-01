@@ -5,6 +5,7 @@ require(__DIR__.'/UPS_API/UPSTrack.php');
 class Shipment {
 	private $emailSource;
 	private $trackingNumber;
+	private $shipDate;
 	private $origin;
 	private $destination;
 	private $waypoints;
@@ -14,12 +15,12 @@ class Shipment {
 	private $ETA;
 	private $status;
 
-
 	/*
-	 * Setter function
+	 * Constructor function
 	 */
-	function setTrackingNumber($num) {
-		$this->trackingNumber = $num;
+	function __construct($trackingNumber) {
+		$this->trackingNumber = $trackingNumber;
+		$this->update();
 	}
 
 	/*
@@ -32,6 +33,10 @@ class Shipment {
 
 	function getTrackingNumber() {
 		return $this->trackingNumber;
+	}
+
+	function getShipDate() {
+		return $this->shipDate;
 	}
 
 	function getOrigin() {
