@@ -20,7 +20,7 @@
       }
       return $client;
     }
-    
+
     function expandHomeDirectory($path) {
       $homeDirectory = getenv('HOME');
       if(empty($homeDirectory)) {
@@ -28,7 +28,7 @@
       }
       return str_replace('~', realpath($homeDirectory), $path);
     }
-    //END GOOGLE AUTH CODE   
+    //END GOOGLE AUTH CODE
 
 // This is the path to initialize.php, your site's gateway to the rest of the UF codebase!  Make sure that it is correct!
     $init_path = "../userfrosting/initialize.php";
@@ -98,7 +98,7 @@
       if(!$app->user->checkAccess('uri_linkaccount')){
         $app->notFound();
       }
-      
+
       if($app->user->googleauth)
       {
         //user has already linked a gmail account
