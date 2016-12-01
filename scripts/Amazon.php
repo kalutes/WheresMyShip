@@ -1,5 +1,4 @@
 <?php
-	require(__DIR__ . "/ParseTrackingNumbers.php")
 
 	/**
 	 * Checks if email is from Amazon and contains link for shipment
