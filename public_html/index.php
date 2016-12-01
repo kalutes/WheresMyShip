@@ -131,10 +131,17 @@
 
    $app->post('/removeAccount/?', function () use ($app) {
       $post = $app->request->post();
+      $client = new Google_Client();
+      $client->setApplicationName('WheresMyShip');
+      $client->setScopes(SCOPES);
+      $client->setAuthConfig(CLIENT_SECRET_PATH);
+      $client->setAccessType('offline');
+      $client->setAccessToken(json_decode($app->user->googleauth, true));
+      $client->revokeToken();
       $app->user->googleauth = null;
       $app->user->firstgrab = 1;
       $app->user->lastemaildate = 0;
-      $app->user->save();
+      $app->user->save(); 
       $ms = $app->alerts;
       $ms->addMessageTranslated("success", "Account successfully removed", $post);
     });
