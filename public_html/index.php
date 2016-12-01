@@ -85,7 +85,7 @@
                   $app->notFound();
               }
         $controller = new UF\ShipmentsController($app);
-        return $controller->trackingNumbers();
+        return $controller->trackingNumbers($app->user->id);
         // $app->render('shipments/shipments.twig',[]);
     });
     /********** ACCOUNT MANAGEMENT INTERFACE **********/

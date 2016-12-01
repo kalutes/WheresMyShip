@@ -17,8 +17,8 @@ class ShipmentsController extends \UserFrosting\BaseController {
         $this->_app = $app;
     }
 
-    public function trackingNumbers(){
-         $trackingNumbers = Shipments::get();
+    public function trackingNumbers($userid){
+         $trackingNumbers = Shipments::where('userid',$userid)->get();
          $this->_app->render('shipments/shipments.twig',[
             "trackingNumbers" => $trackingNumbers
         ]);
