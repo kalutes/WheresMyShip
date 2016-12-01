@@ -1,0 +1,37 @@
+{% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Link Account",
+                    "description" : "A page to link your gmail account."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block page_scripts%}
+	    
+		<script>
+		$('#signinButton').click(removeAccount);
+
+		function removeAccount() {
+			$('#signinButton').attr('style', 'display: none');
+			var csrf_token = $("meta[name=csrf_token]").attr("content");
+			console.log(csrf_token);
+			var toPost = { "csrf_token":csrf_token };	
+			$.ajax({
+				type: 'POST',
+				url: 'http://wheresmyship.com/removeAccount',
+				data: toPost,
+				dataType: "json"
+			});
+  			window.location.href = "linkaccount";
+		}
+		</script>
+	    {% endblock %}
+
+	    {% block content %}
+                <h1>You have already linked a Gmail account. To remove this account, click the button below.</h1>
+		<button id="signinButton">Remove Account</button>
+    		
+            {% endblock %}

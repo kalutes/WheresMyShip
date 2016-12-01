@@ -1,10 +1,10 @@
 {% extends "layouts/layout-dashboard.twig" %}
             {% set page_group = "dashboard" %}
 
-            {% block page %}
+            {% block page %}   
                 {% set page = page | merge({
-                    "title"       : "Account Groups",
-                    "description" : "A list of the groups to which you belong."
+                    "title"       : "Link Account",
+                    "description" : "A page to link your gmail account."
                 }) %}
                 {{ parent() }}
             {% endblock %}
@@ -12,16 +12,16 @@
             {% block page_scripts%}
 	    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
 		</script>
-
+		
 		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
 		</script>
-
+		
 		<script>
 			function start() {
 				gapi.load('auth2', function() {
 					auth2 = gapi.auth2.init({
-						client_id: 'ENTER',
-						scope: 'GMAIL'
+						client_id: '96746283407-bjktir8cmn398pqan3dtv86a3ljs08tv.apps.googleusercontent.com', 
+						scope: 'https://www.googleapis.com/auth/gmail.readonly'
 					});
 				});
 			}
@@ -37,15 +37,18 @@
 		function signInCallback(authResult) {
 			if(authResult['code']) {
 				$('#signinButton').attr('style', 'display: none');
+				
+				var csrf_token = $("meta[name=csrf_token]").attr("content");
+				console.log(csrf_token);
+				var toPost = { "data":authResult['code'], "csrf_token":csrf_token };
+				console.log(toPost['data']);	
 				$.ajax({
 					type: 'POST',
-					url: 'http://example.com/storeauthcode',
-					contentType: 'application/octet-stream; charset=urf-8',
-					success: function(result) {
-					},
-					processData: false,
-					data: authResult['code']
+					url: 'http://wheresmyship.com/linkaccount',
+					data: toPost,
+					dataType: "json"
 				});
+				window.location.href="linkaccount";
 			} else {
 				//error
 			}
@@ -54,7 +57,7 @@
 	    {% endblock %}
 
 	    {% block content %}
-
-		<button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
-
+                <h1>Click the button below to link your Gmail account.</h1>
+		<button id="signinButton">Link Account</button>
+    		
             {% endblock %}

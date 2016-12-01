@@ -8,7 +8,6 @@
 # Composer and Google API
 composer.phar
 quickstart.php
-vendor/*
 client_secret.json
 
 # VIM swap files

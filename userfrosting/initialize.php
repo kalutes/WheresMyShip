@@ -88,7 +88,10 @@ $table_user = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . 
     "flag_password_reset",
     "created_at",
     "updated_at",
-    "password"
+    "password",
+    "googleauth",
+    "firstgrab",
+    "lastemaildate"
 ]);
 
 $table_user_event = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "user_event", [

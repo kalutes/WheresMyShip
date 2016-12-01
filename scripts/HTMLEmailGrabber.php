@@ -1,7 +1,6 @@
 
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-require(__DIR__.'/PotentialEmails.php');
 require(__DIR__.'/ParseTrackingNumbers.php');
 
 
@@ -18,14 +17,11 @@ if (php_sapi_name() != 'cli') {
   throw new Exception('This application must be run on the command line.');
 }
 
-$client = getClient();
-$gmail = new Google_Service_Gmail($client);
 if (!file_exists('messages')) {
   mkdir('messages');
 }
 chdir('messages');
 $newestDate = 0;
-
 
 class Email {
 	public $From;
@@ -39,40 +35,25 @@ class Email {
  * Returns an authorized API client.
  * @return Google_Client the authorized client object
  */
-function getClient() {
+function getClient($googleAuth) {
+  global $currentID;
+  global $conn;
   $client = new Google_Client();
   $client->setApplicationName(APPLICATION_NAME);
   $client->setScopes(SCOPES);
   $client->setAuthConfig(CLIENT_SECRET_PATH);
   $client->setAccessType('offline');
-
-  // Load previously authorized credentials from a file.
-  $credentialsPath = expandHomeDirectory(CREDENTIALS_PATH);
-  if (file_exists($credentialsPath)) {
-    $accessToken = json_decode(file_get_contents($credentialsPath), true);
-  } else {
-    // Request authorization from the user.
-    $authUrl = $client->createAuthUrl();
-    printf("Open the following link in your browser:\n%s\n", $authUrl);
-    print 'Enter verification code: ';
-    $authCode = trim(fgets(STDIN));
-
-    // Exchange authorization code for an access token.
-    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-
-    // Store the credentials to disk.
-    if(!file_exists(dirname($credentialsPath))) {
-      mkdir(dirname($credentialsPath), 0700, true);
-    }
-    file_put_contents($credentialsPath, json_encode($accessToken));
-    printf("Credentials saved to %s\n", $credentialsPath);
-  }
-  $client->setAccessToken($accessToken);
-
+  
+  //$authUrl = $client->createAuthUrl();
+  //printf("%s\n", $authUrl);
+  //$authCode = trim(fgets(STDIN)); 
+  //$accessToken = $client->fetchAccessTokenWithAuthCode($googleAuth);
+  //$conn->prepare("UPDATE uf_user SET googleauth = ? WHERE id = ?")->execute([json_encode($accessToken), $currentID]);
+  $client->setAccessToken(json_decode($googleAuth, true));
   // Refresh the token if it's expired.
   if ($client->isAccessTokenExpired()) {
     $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-    file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
+    $conn->prepare("UPDATE uf_user SET googleauth = ? WHERE id = ?")->ececute([json_encode($client->getAccessToken(), true), $currentID]);
   }
   return $client;
 }
@@ -162,15 +143,17 @@ function getOurHeaders($fullEmail){
 
 
 
-function getNewEmails($initialGrab = false)
+function getNewEmails($initialGrab, $lastEmailDate, $googleAuth)
 {
-	global $gmail;
+	$client = getClient($googleAuth);
+	$gmail = new Google_Service_Gmail($client);
 	$list = $gmail->users_messages->listUsersMessages('me', ['maxResults' => 1000]);
 	$i = 0;
 	$date;
-	global $newestDate;
 	$continueGrabbingEmails = true;
 	$currentDate = time();
+	global $conn;
+	global $currentID;
 	try{
 		while ($list->getMessages() != null && $continueGrabbingEmails) {
 
@@ -183,17 +166,19 @@ function getNewEmails($initialGrab = false)
 				if($initialGrab && $currentDate - $date > (3*24*3600))
 				{
 					$continueGrabbingEmails = false;
+					$conn->prepare("UPDATE uf_user SET firstgrab = 0 WHERE id = ?")->execute([$currentID]);
+					$conn->prepare("UPDATE uf_user SET lastemaildate = ? WHERE id = ?")->execute([$date, $currentID]);
 					break;
 				}
-				if(!$initialGrab && $newestDate >= $date)
+				if(!$initialGrab && $lastEmailDate >= $date)
 				{
 					$continueGrabbingEmails = false;
+					$conn->prepare("UPDATE uf_user SET lastemaildate = ? WHERE id = ?")->execute([$date, $currentID]);
 					break;
 				}
-				if($date > $newestDate)
+				if($date > $lastEmailDate)
 				{
-					$newestDate = $date;
-					print_r("Found New Email!\r\n");
+					$lastEmailDate = $date;
 				}
 				$payload = $single_message->getPayload();
 				$parts = $payload->getParts();
@@ -343,24 +328,35 @@ function getNewEmails($initialGrab = false)
 	}
 }
 
-$timerDate = time();
-getNewEmails(true);
-chdir('..');
-//selectEmails();
-//chdir('..');
-addTrackingNumbers();
-chdir('messages');
-print_r("Waiting on new Emails...\r\n");
+$servername = "localhost";
+$username = "userfrosting_adm";
+$password = "wheresmyship";
+$dbname = "userfrosting";
+$id = 1; //must be changed to generic user id
+$trackingNumber;
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$currentID = 0;
 while(true)
 {
-	if(time() - $timerDate >= 5)
-	{
-		$timerDate = time();
-		getNewEmails();
-		//chdir('..');
-		//selectEmails();
-		chdir('..');
-		addTrackingNumbers();
-		chdir('messages');
+	$query = $conn->query('SELECT * FROM uf_user');
+	foreach ($query as $row)
+	{	
+		$currentID = $row['id'];
+		if (!file_exists($row['id'])) {
+  			mkdir($row['id']);
+		}
+		chdir($row['id']);
+		if(!$row['googleauth'])
+		{
+			//user hasn't added an email account, ignore
+		}
+		else
+		{	
+			$timerDate = time();
+			print_r("Grabbing Emails for user " . $row['id'] . "\n");
+			getNewEmails($row['firstgrab'], $row['lastemaildate'], $row['googleauth']);
+		}
+		chdir("..");
 	}
-}
+}	

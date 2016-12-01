@@ -1,0 +1,62 @@
+{% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Account Groups",
+                    "description" : "A list of the groups to which you belong."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block page_scripts%}
+	    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+		</script>
+		
+		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+		</script>
+		
+		<script>
+			function start() {
+				gapi.load('auth2', function() {
+					auth2 = gapi.auth2.init({
+						client_id: '96746283407-bjktir8cmn398pqan3dtv86a3ljs08tv.apps.googleusercontent.com' 
+						//scope: 'GMAIL'
+					});
+				});
+			}
+		</script>
+
+		<script>
+			$('#signinButton').click(function() {
+			auth2.grantOfflineAccess({'redirect_uri' : 'postmessage'}).then(signInCallback);
+			});
+		</script>
+
+		<script>
+		function signInCallback(authResult) {
+			if(authResult['code']) {
+				$('#signinButton').attr('style', 'display: none');
+				
+				var csrf_token = $("meta[name=csrf_token]").attr("content");
+				console.log(csrf_token);
+				var toPost = { "data":authResult['code'], "csrf_token":csrf_token };
+				console.log(toPost['data']);	
+				$.ajax({
+					type: 'POST',
+					url: 'http://wheresmyship.com/linkaccount',
+					data: toPost,
+					dataType: "json"
+				});
+			} else {
+				//error
+			}
+		}
+		</script>
+	    {% endblock %}
+
+	    {% block content %}
+              
+		<button id="signinButton">Authorize</button>
+    		
+            {% endblock %}
