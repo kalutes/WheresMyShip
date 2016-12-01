@@ -1,21 +1,19 @@
 <?php
-require(__DIR__.'/CarrierInfo.php');
 require(__DIR__.'/UPS_API/UPSTrack.php');
 
 class Shipment {
-	private $emailSource;
 	private $trackingNumber;
 	private $shipDate;
 	private $origin;
 	private $destination;
-	private $waypoints;
+	private $currentStatus;
 	private $carrier;
 	private $sender;
 	private $currentLocation;
 	private $ETA;
 	private $status;
 
-	/*
+	/**
 	 * Constructor function
 	 */
 	function __construct($trackingNumber) {
@@ -23,14 +21,14 @@ class Shipment {
 		$this->update();
 	}
 
-	/*
+	/**
+	 * Add email address of sender
+	 */
+
+	/**
 	 * Accessors function
 	 * @return shipment properties
 	 */
-	function getEmailSource() {
-		return $this->emailSource;
-	}
-
 	function getTrackingNumber() {
 		return $this->trackingNumber;
 	}
@@ -47,8 +45,8 @@ class Shipment {
 		return $this->destination;
 	}
 
-	function getWaypoints() {
-		return $this->waypoints;
+	function getStatus() {
+		return $this->status;
 	}
 
 	function getCarrier() {
@@ -67,10 +65,6 @@ class Shipment {
 		return $this->ETA;
 	}
 
-	function getStatus() {
-		return $this->status;
-	}
-
 	/*
 	 * Update function
 	 * @return error code: (-1) for API issues, (0) for other errors, (0) for success
@@ -78,12 +72,22 @@ class Shipment {
 	 */
 	function update() {
 		$returned = upsTrack($this->trackingNumber);
-		print_r($returned);
-		$this->origin = $returned['TRACKRESPONSE']['SHIPMENT']['SHIPPER'];
-		$this->destination = $returned['TRACKRESPONSE']['SHIPMENT']['SHIPTO'];
-		$carrier = new CarrierInfo;
-		$this->carrier = $carrier->UPS();
-		//print_r($this);
+		// print_r($returned);
+		$shipmentInfo = $returned['TRACKRESPONSE']['SHIPMENT'];
+		// print_r($shipmentInfo);
+		$this->carrier = 'UPS';
+		$this->shipDate = $shipmentInfo['PICKUPDATE'];
+		$this->origin = $shipmentInfo['SHIPPER']['ADDRESS'];
+		$this->destination = $shipmentInfo['SHIPTO']['ADDRESS'];
+		$this->status = $shipmentInfo['PACKAGE']['ACTIVITY']['STATUS']['STATUSTYPE']['DESCRIPTION'];
+		$this->carrier = 'UPS';
+		$this->sender = $shipmentInfo['SHIPPER'];
+		$this->currentLocation = $shipmentInfo['PACKAGE']['ACTIVITY']['ACTIVITYLOCATION']['ADDRESS'];
+		$this->ETA = $shipmentInfo['SCHEDULEDDELIVERYDATE'];
+		if ($this->ETA == 0) {
+			$this->ETA = $shipmentInfo['PACKAGE']['RESCHEDULEDDELIVERYDATE'];
+		}
+		print_r($this);
 	}
 }
 ?>

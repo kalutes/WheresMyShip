@@ -1,5 +1,5 @@
 <?php
 	require('Shipment.php');
-	$trackingNumber = '1Z3Y95F10304374477';
+	$trackingNumber = '1ZA288930323726273';
 	$ship = new Shipment($trackingNumber);
 ?>
