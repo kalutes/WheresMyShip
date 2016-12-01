@@ -10,14 +10,18 @@
          {% endblock %}
 
          {% block content %}
-         {{user.id}}
+         {{test}}
          <h1>Your Shipments:</h1>
          <br>
          <div class="form-group">
              <label for="trackingnumber">Add Tracking Number:</label>
              <input type="text" class="form-control" id="trackingnumber" style="width:300px">
          </div>
-         <table style="border-collapse:collapse">
+         <table>
+        <tr style="font-weight:bold;font-size:15px">
+            <td style= "padding-bottom:10px;">#</td>
+            <td style="padding-bottom:10px;padding-left:20px;">Tracking Number</td>
+        </tr>
         {% set increment = 1 %}
          {% for trackingNumber in trackingNumbers %}
          <tr>
@@ -28,6 +32,6 @@
          {% endfor %}
         </table>
 
-
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
         {% endblock %}
