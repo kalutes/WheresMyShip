@@ -23,15 +23,22 @@ function addTrackingNumbers($userid){
 			foreach($arr as $e){
 				printf($e."\n");
 
-				$stmt = $conn->prepare('SELECT * from uf_shipments WHERE trackingNumber=:trackingNumber');
-				$stmt->bindParam(':trackingNumber', $trackingNumber);
-				$stmt->execute();
 
 
-					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber) VALUES (:userid, :trackingNumber)");
+					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber, shipDate, origin, destination, currentLocation, eta) VALUES (:userid, :trackingNumber, :shipDate, :origin, :destination, :currentLocation, :eta);");
 					$shipment = new Shipment($e);
+					$shipDate = $shipment->getShipDate();
+					$origin = $shipment->getOrigin()['ADDRESSLINE1'] . " " . $shipment->getOrigin()['CITY'] . " " . $shipment->getOrigin()['STATEPROVINCECODE'] . " " . $shipment->getOrigin()['POSTALCODE'] . " " . $shipment->getOrigin()['COUNTRYCODE'];
+					$destination = $shipment->getDestination()['CITY'] . " " . $shipment->getDestination()['STATEPROVINCECODE'] . " " . $shipment->getDestination()['POSTALCODE'] . " " . $shipment->getDestination()['COUNTRYCODE'];
+					$currentLocation = $shipment->getCurrentLocation()['CITY'] . " " . $shipment->getCurrentLocation()['STATEPROVINCECODE'] . " " . $shipment->getCurrentLocation()['COUNTRYCODE'];
+					$eta = $shipment->getETA();
 					$stmt->bindParam(':userid', $userid);
 					$stmt->bindParam(':trackingNumber', $trackingNumber);
+					$stmt->bindParam(':shipDate', $shipDate);
+					$stmt->bindParam(':origin', $origin);
+					$stmt->bindParam(':destination', $destination);
+					$stmt->bindParam(':currentLocation', $currentLocation);
+					$stmt->bindParam(':eta', $eta);
 					$trackingNumber = $e;
 					$stmt->execute(); 
 
