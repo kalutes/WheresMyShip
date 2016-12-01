@@ -32,11 +32,11 @@
          <tr>
              <td>{{increment}}.</td>
              <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
-             <td style="padding-left:20px">{{trackingNumber.shipDate}}</td>
+             <td style="padding-left:20px"><script>var dickbutt ={{trackingNumber.shipDate}};dickbutt=dickbutt.toString();document.write(dickbutt.substring(4,6) + "/" + dickbutt.substring(6,8)+ "/" + dickbutt.substring(0,4));</script></td>
              <td style="padding-left:20px">{{trackingNumber.origin}}</td>
              <td style="padding-left:20px">{{trackingNumber.destination}}</td>
              <td style="padding-left:20px">{{trackingNumber.currentLocation}}</td>
-             <td style="padding-left:20px">{{trackingNumber.eta}}</td>
+             <td style="padding-left:20px"><script>var dickbutt ={{trackingNumber.eta}};dickbutt=dickbutt.toString();document.write(dickbutt.substring(4,6) + "/" + dickbutt.substring(6,8)+ "/" + dickbutt.substring(0,4));</script></td>
         </tr>
         {% set increment = increment + 1 %}
          {% endfor %}
