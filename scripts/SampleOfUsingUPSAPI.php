@@ -1,6 +1,6 @@
 <?php
 	require('Shipment.php');
-	$trackingNumber = '1Z3Y95F10304374477';
+	$trackingNumber = '1Z20E961YW55079264';
 	$ship = new Shipment;
 	$ship->setTrackingNumber($trackingNumber);
 	$ship->update();
