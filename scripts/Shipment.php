@@ -77,6 +77,12 @@ class Shipment {
 		// print_r($shipmentInfo);
 		$this->carrier = 'UPS';
 		$this->shipDate = $shipmentInfo['PICKUPDATE'];
+		/*
+		if ($this->shipDate != 0) {
+			$this->shipDate = implode("/", str_split($this->shipDate, 4));
+			$this->shipDate = implode("/", str_split($this->shipDate, 7));
+		}
+		*/
 		$this->origin = $shipmentInfo['SHIPPER']['ADDRESS'];
 		$this->destination = $shipmentInfo['SHIPTO']['ADDRESS'];
 		$this->status = $shipmentInfo['PACKAGE']['ACTIVITY']['STATUS']['STATUSTYPE']['DESCRIPTION'];
