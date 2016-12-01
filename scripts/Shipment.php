@@ -6,7 +6,6 @@ class Shipment {
 	private $shipDate;
 	private $origin;
 	private $destination;
-	private $currentStatus;
 	private $carrier;
 	private $sender;
 	private $currentLocation;
@@ -82,7 +81,6 @@ class Shipment {
 		$this->destination = $shipmentInfo['SHIPTO']['ADDRESS'];
 		$this->status = $shipmentInfo['PACKAGE']['ACTIVITY']['STATUS']['STATUSTYPE']['DESCRIPTION'];
 		$this->carrier = 'UPS';
-		$this->sender = $shipmentInfo['SHIPPER'];
 		$this->currentLocation = $shipmentInfo['PACKAGE']['ACTIVITY']['ACTIVITYLOCATION']['ADDRESS'];
 		$this->ETA = $shipmentInfo['SCHEDULEDDELIVERYDATE'];
 		if ($this->ETA == 0) {
