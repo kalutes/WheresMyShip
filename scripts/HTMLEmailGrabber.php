@@ -3,6 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 require(__DIR__.'/ParseTrackingNumbers.php');
 
+date_default_timezone_set('America/Indiana/Indianapolis');
 
 define('APPLICATION_NAME', 'Gmail API PHP Quickstart');
 define('CREDENTIALS_PATH', '~/.credentials/gmail-php-quickstart.json');
