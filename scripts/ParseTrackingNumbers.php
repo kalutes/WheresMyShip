@@ -22,8 +22,16 @@ function addTrackingNumbers($userid){
 			$arr = parseTrackingNumber($file,'ups');
 			foreach($arr as $e){
 				printf($e."\n");
+						
 
-
+					$AlreadyInDB = false;
+					$query = $conn->query('SELECT * FROM uf_shipments WHERE trackingNumber=' . '"' . $e . '"' . ';');
+					foreach ($query as $row){
+						if(strcasecmp($row['trackingNumber'], $e) == 0){
+								$AlreadyInDB = true;	
+						}
+					}
+					if($AlreadyInDB == false){
 
 					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber, shipDate, origin, destination, currentLocation, eta) VALUES (:userid, :trackingNumber, :shipDate, :origin, :destination, :currentLocation, :eta);");
 					$shipment = new Shipment($e);
@@ -41,6 +49,7 @@ function addTrackingNumbers($userid){
 					$stmt->bindParam(':eta', $eta);
 					$trackingNumber = $e;
 					$stmt->execute(); 
+					}
 
 
 				//array_push($trackingNums['ups'],$e);
