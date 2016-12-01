@@ -163,6 +163,13 @@
         $controller = new UF\ShipmentsController($app);
         return $controller->trackingNumbers($app->user->id);
     });
+    $app->post('/shipments/?',function() use ($app){
+        if (!$app->user->checkAccess('uri_shipments')){
+                  $app->notFound();
+              }
+        $controller = new UF\ShipmentsController($app);
+        return $controller->postTrackingNumber($app->user->id);
+    });
     /********** ACCOUNT MANAGEMENT INTERFACE **********/
 
     $app->get('/account/:action/?', function ($action) use ($app) {

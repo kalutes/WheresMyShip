@@ -8,15 +8,29 @@
              }) %}
              {{ parent() }}
          {% endblock %}
-
+         {% block page_scripts %}
+            <script>
+            $(document).ready(function() {
+                // Load the validator rules for this form
+                var validators = {{validators | raw}};
+                ufFormSubmit(
+                  $("form[name='trackingNumber']"),
+                  validators,
+                  $("#userfrosting-alerts"),
+                  function(data, statusText, jqXHR) {
+                      // Reload the page on success
+                      window.location.reload(true);
+                  }
+                );
+            });
+        </script>
+        {% endblock %}
          {% block content %}
-         {{test}}
          <h1>Your Shipments:</h1>
          <br>
-         <div class="form-group">
-             <label for="trackingnumber">Add Tracking Number:</label>
-             <input type="text" class="form-control" id="trackingnumber" style="width:300px">
-         </div>
+
+
+
          <table>
         <tr style="font-weight:bold;font-size:15px">
             <td style= "padding-bottom:10px;">#</td>
@@ -28,6 +42,9 @@
             <td style="padding-bottom:10px;padding-left:20px;">Estimated Time of Arrival</td>
         </tr>
         {% set increment = 1 %}
+        {% if trackingNumbers|length == 0 %}
+        <div class="form-group">You have no tracking numbers</div>
+        {% else %}
          {% for trackingNumber in trackingNumbers %}
          <tr>
              <td>{{increment}}.</td>
@@ -41,7 +58,19 @@
         {% set increment = increment + 1 %}
          {% endfor %}
         </table>
-
+     {% endif %}
+        <br><br><br>
+        <!-- <form class="form-horizontal" role="form" name="trackingNumber" action="{{site.uri.public}}/shipments" method="post">
+                   <div class="form-group">
+                     <label for="trackingnumber">Add Tracking Number:</label>
+                   </div>
+                   <div class="form-group">
+                       <input type="text" class="form-control" id="trackingnumber" name = "trackingNumber" style="width:300px">
+                    </div>
+   <div class="form-group">
+             <button type="submit" class="btn btn-success text-center">Submit</button>
+         </div>
+       </form> -->
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
         {% endblock %}

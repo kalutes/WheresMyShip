@@ -1,0 +1,14 @@
+{
+           "trackingNumber" : {
+               "validators" : {
+                   "length" : {
+                       "min" : 1,
+                       "max" : 40,
+                       "message" : "The new title must be between 1 and 40 characters long."
+                   }
+               },
+               "sanitizers" : {
+                   "raw" : ""
+               }
+           }
+       }
