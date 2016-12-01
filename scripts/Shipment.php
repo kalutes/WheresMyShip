@@ -6,7 +6,6 @@ class Shipment {
 	private $shipDate;
 	private $origin;
 	private $destination;
-	private $currentStatus;
 	private $carrier;
 	private $sender;
 	private $currentLocation;
