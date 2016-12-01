@@ -31,7 +31,18 @@
 	    {% endblock %}
 
 	    {% block content %}
-                <h1>You have already linked a Gmail account. To remove this account, click the button below.</h1>
-		<button align="center" id="signinButton" type="submit" class="btn btn-success text-center">Remove Account</button>
+                <div class="row">
+    		  <div class="col-lg-12">
+        	    <h1 class="page-header">Remove Account</h1>
+    		  </div>
+    		  <!-- /.col-lg-12 -->
+		</div>               
+		<h1 class="panel-title">Click the button below to remove your Gmail account.</h1>
+		<div align="center">
+			<br>
+			<button align="center" type="submit" class="btn btn-success text-center" id="signinButton">Remove Account</button>
+    		</div>
+		<br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
     		
             {% endblock %}

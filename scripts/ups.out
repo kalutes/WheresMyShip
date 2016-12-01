@@ -1,0 +1,315 @@
+Array
+(
+    [TRACKRESPONSE] => Array
+        (
+            [RESPONSE] => Array
+                (
+                    [TRANSACTIONREFERENCE] => Array
+                        (
+                            [XPCIVERSION] => 1.0
+                        )
+
+                    [RESPONSESTATUSCODE] => 1
+                    [RESPONSESTATUSDESCRIPTION] => Success
+                )
+
+            [SHIPMENT] => Array
+                (
+                    [SHIPPER] => Array
+                        (
+                            [SHIPPERNUMBER] => A28893
+                            [ADDRESS] => Array
+                                (
+                                    [ADDRESSLINE1] => 4400 12TH STREET EXTENSION,
+                                    [CITY] => WEST COLUMBIA
+                                    [STATEPROVINCECODE] => SC
+                                    [POSTALCODE] => 29172   3300
+                                    [COUNTRYCODE] => US
+                                )
+
+                        )
+
+                    [SHIPTO] => Array
+                        (
+                            [ADDRESS] => Array
+                                (
+                                    [CITY] => WEST LAFAYETTE
+                                    [STATEPROVINCECODE] => IN
+                                    [POSTALCODE] => 47906
+                                    [COUNTRYCODE] => US
+                                )
+
+                        )
+
+                    [SHIPMENTWEIGHT] => Array
+                        (
+                            [UNITOFMEASUREMENT] => Array
+                                (
+                                    [CODE] => LBS
+                                )
+
+                            [WEIGHT] => 4.50
+                        )
+
+                    [SERVICE] => Array
+                        (
+                            [CODE] => 003
+                            [DESCRIPTION] => UPS GROUND
+                        )
+
+                    [REFERENCENUMBER] => Array
+                        (
+                            [CODE] => 01
+                            [VALUE] => 432133133
+                        )
+
+                    [SHIPMENTIDENTIFICATIONNUMBER] => 1ZA288930323726273
+                    [PICKUPDATE] => 20161128
+                    [PACKAGE] => Array
+                        (
+                            [TRACKINGNUMBER] => 1ZA288930323726273
+                            [RESCHEDULEDDELIVERYDATE] => 20161201
+                            [REDIRECT] => Array
+                                (
+                                    [COMPANYNAME] => UNIVERSITY BOOK STORE, INC 720
+                                    [LOCATIONID] => U80971773
+                                    [UPSAPADDRESS] => Array
+                                        (
+                                            [ADDRESSLINE1] => 720 NORTHWESTERN AVE
+                                            [ADDRESSLINE2] => 5
+                                            [CITY] => WEST LAFAYETTE
+                                            [STATEPROVINCECODE] => IN
+                                            [POSTALCODE] => 47906
+                                            [COUNTRYCODE] => US
+                                        )
+
+                                )
+
+                            [ACTIVITY] => Array
+                                (
+                                    [ACTIVITYLOCATION] => Array
+                                        (
+                                            [ADDRESS] => Array
+                                                (
+                                                    [CITY] => LAFAYETTE
+                                                    [STATEPROVINCECODE] => IN
+                                                    [COUNTRYCODE] => US
+                                                )
+
+                                        )
+
+                                    [STATUS] => Array
+                                        (
+                                            [STATUSTYPE] => Array
+                                                (
+                                                    [CODE] => I
+                                                    [DESCRIPTION] => DESTINATION SCAN
+                                                )
+
+                                            [STATUSCODE] => Array
+                                                (
+                                                    [CODE] => DS
+                                                )
+
+                                        )
+
+                                    [DATE] => 20161130
+                                    [TIME] => 190900
+                                )
+
+                            [PACKAGEWEIGHT] => Array
+                                (
+                                    [UNITOFMEASUREMENT] => Array
+                                        (
+                                            [CODE] => LBS
+                                        )
+
+                                    [WEIGHT] => 4.50
+                                )
+
+                            [REFERENCENUMBER] => Array
+                                (
+                                    [CODE] => 01
+                                    [VALUE] => UPS-ILHOD-D114GPMDH2  BDS48612   UP
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+Array
+(
+    [TRACKRESPONSE] => Array
+        (
+            [RESPONSE] => Array
+                (
+                    [TRANSACTIONREFERENCE] => Array
+                        (
+                            [XPCIVERSION] => 1.0
+                        )
+
+                    [RESPONSESTATUSCODE] => 1
+                    [RESPONSESTATUSDESCRIPTION] => Success
+                )
+
+            [SHIPMENT] => Array
+                (
+                    [SHIPPER] => Array
+                        (
+                            [SHIPPERNUMBER] => 3Y95F1
+                            [ADDRESS] => Array
+                                (
+                                    [ADDRESSLINE1] => 1850 MERCER RD
+                                    [CITY] => LEXINGTON
+                                    [STATEPROVINCECODE] => KY
+                                    [POSTALCODE] => 40511   1013
+                                    [COUNTRYCODE] => US
+                                )
+
+                        )
+
+                    [SHIPTO] => Array
+                        (
+                            [ADDRESS] => Array
+                                (
+                                    [CITY] => WEST LAFAYETTE
+                                    [STATEPROVINCECODE] => IN
+                                    [POSTALCODE] => 47906
+                                    [COUNTRYCODE] => US
+                                )
+
+                        )
+
+                    [SHIPMENTWEIGHT] => Array
+                        (
+                            [UNITOFMEASUREMENT] => Array
+                                (
+                                    [CODE] => LBS
+                                )
+
+                            [WEIGHT] => 0.30
+                        )
+
+                    [SERVICE] => Array
+                        (
+                            [CODE] => 003
+                            [DESCRIPTION] => UPS GROUND
+                        )
+
+                    [REFERENCENUMBER] => Array
+                        (
+                            [CODE] => 01
+                            [VALUE] => 1349008007
+                        )
+
+                    [SHIPMENTIDENTIFICATIONNUMBER] => 1Z3Y95F10304374477
+                    [PICKUPDATE] => 20161031
+                    [DELIVERYDATEUNAVAILABLE] => Array
+                        (
+                            [TYPE] => Scheduled Delivery
+                            [DESCRIPTION] => Scheduled Delivery Date is not currently available, please try back later
+                        )
+
+                    [PACKAGE] => Array
+                        (
+                            [TRACKINGNUMBER] => 1Z3Y95F10304374477
+                            [REDIRECT] => Array
+                                (
+                                    [COMPANYNAME] => UNIVERSITY BOOK STORE, IN
+                                    [LOCATIONID] => U80971773
+                                    [UPSAPADDRESS] => Array
+                                        (
+                                            [ADDRESSLINE1] => 720 NORTHWESTERN AVE
+                                            [CITY] => WEST LAFAYETTE
+                                            [STATEPROVINCECODE] => IN
+                                            [POSTALCODE] => 47906
+                                            [COUNTRYCODE] => US
+                                        )
+
+                                )
+
+                            [ACTIVITY] => Array
+                                (
+                                    [ACTIVITYLOCATION] => Array
+                                        (
+                                            [ADDRESS] => Array
+                                                (
+                                                    [CITY] => WEST LAFAYETTE
+                                                    [STATEPROVINCECODE] => IN
+                                                    [POSTALCODE] => 47906
+                                                    [COUNTRYCODE] => US
+                                                )
+
+                                            [SIGNEDFORBYNAME] => WILSON ERNEST H
+                                        )
+
+                                    [STATUS] => Array
+                                        (
+                                            [STATUSTYPE] => Array
+                                                (
+                                                    [CODE] => D
+                                                    [DESCRIPTION] => DELIVERED
+                                                )
+
+                                            [STATUSCODE] => Array
+                                                (
+                                                    [CODE] => 2W
+                                                )
+
+                                        )
+
+                                    [DATE] => 20161102
+                                    [TIME] => 181000
+                                )
+
+                            [PACKAGEWEIGHT] => Array
+                                (
+                                    [UNITOFMEASUREMENT] => Array
+                                        (
+                                            [CODE] => LBS
+                                        )
+
+                                    [WEIGHT] => 0.30
+                                )
+
+                            [REFERENCENUMBER] => Array
+                                (
+                                    [CODE] => 01
+                                    [VALUE] => UPS-KYLEX-T112QX4DW4  UPST874907 UP
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+Array
+(
+    [TRACKRESPONSE] => Array
+        (
+            [RESPONSE] => Array
+                (
+                    [TRANSACTIONREFERENCE] => Array
+                        (
+                            [XPCIVERSION] => 1.0
+                        )
+
+                    [RESPONSESTATUSCODE] => 0
+                    [RESPONSESTATUSDESCRIPTION] => Failure
+                    [ERROR] => Array
+                        (
+                            [ERRORSEVERITY] => Hard
+                            [ERRORCODE] => 150022
+                            [ERRORDESCRIPTION] => Invalid tracking number
+                        )
+
+                )
+
+        )
+
+)
