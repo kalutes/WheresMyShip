@@ -32,6 +32,11 @@
          <tr>
              <td>{{increment}}.</td>
              <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
+             <td style="padding-left:20px">{{trackingNumber.shipDate}}</td>
+             <td style="padding-left:20px">{{trackingNumber.origin}}</td>
+             <td style="padding-left:20px">{{trackingNumber.destination}}</td>
+             <td style="padding-left:20px">{{trackingNumber.currentLocation}}</td>
+             <td style="padding-left:20px">{{trackingNumber.eta}}</td>
         </tr>
         {% set increment = increment + 1 %}
          {% endfor %}
