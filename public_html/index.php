@@ -141,7 +141,7 @@
       $app->user->googleauth = null;
       $app->user->firstgrab = 1;
       $app->user->lastemaildate = 0;
-      $app->user->save(); 
+      $app->user->save();
       $ms = $app->alerts;
       $ms->addMessageTranslated("success", "Account successfully removed", $post);
     });
@@ -162,7 +162,6 @@
               }
         $controller = new UF\ShipmentsController($app);
         return $controller->trackingNumbers($app->user->id);
-        // $app->render('shipments/shipments.twig',[]);
     });
     /********** ACCOUNT MANAGEMENT INTERFACE **********/
 

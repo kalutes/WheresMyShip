@@ -113,7 +113,12 @@ $table_group = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] .
 
 $table_shipments = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "shipments", [
     "userid",
-    "trackingNumber"
+    "trackingNumber",
+	"shipDate",
+	"origin",
+	"destination",
+	"currentLocation",
+	"eta"
 ]);
 
 $table_group_user = new \UserFrosting\DatabaseTable($app->config('db')['db_prefix'] . "group_user");
