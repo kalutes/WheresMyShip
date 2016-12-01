@@ -1,23 +1,22 @@
 <?php
-function addTrackingNumbers(){
+function addTrackingNumbers($userid){
 
 	$servername = "localhost";
 	$username = "userfrosting_adm";
 	$password = "wheresmyship";
 	$dbname = "userfrosting";
-	$id = 1; //must be changed to generic user id
 	$trackingNumber;
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$dir = new DirectoryIterator(__DIR__."/messages/");
+	$dir = new DirectoryIterator(__DIR__."/messages/".$userid."/");
 	$trackingNums=array();
 	// $upsCount = 0;
 	// $fedexCount = 0;
 	$trackingNums['ups']=array();
 	$trackingNums['fedex']=array();
 	foreach ($dir as $fileinfo) {
-		if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$fileinfo->getFilename())) {
-			$file = __DIR__."/messages/".$fileinfo->getFilename();
+		if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$userid."/".$fileinfo->getFilename())) {
+			$file = __DIR__."/messages/".$userid."/".$fileinfo->getFilename();
 			//search each file for UPS tracking numbers
 			$arr = parseTrackingNumber($file,'ups');
 			foreach($arr as $e){
@@ -32,27 +31,28 @@ function addTrackingNumbers(){
 				if(!$row){
 
 					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber) VALUES (:userid, :trackingNumber)");
-					$stmt->bindParam(':userid', $id);
+					$stmt->bindParam(':userid', $userid);
 					$stmt->bindParam(':trackingNumber', $trackingNumber);
 					$trackingNumber = $e;
 					$stmt->execute(); 
 
 				}
 
-				array_push($trackingNums['ups'],$e);
-				$upsCount++;
+				//array_push($trackingNums['ups'],$e);
+				//$upsCount++;
 			}
 
 			//search for FedEx tracking numbers
-			$arr = parseTrackingNumber($file,'fedex');
+			/*$arr = parseTrackingNumber($file,'fedex');
 			foreach($arr as $e){
 				printf($e."\n");
 				array_push($trackingNums['fedex'],$e);
 				$fedexCount++;
-			}
+			}*/
+			unlink($file);
 		}
 	}
-	print_r($trackingNums);
+	//print_r($trackingNums);
 }
 
 

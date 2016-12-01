@@ -54,7 +54,7 @@ function getClient($googleAuth) {
   // Refresh the token if it's expired.
   if ($client->isAccessTokenExpired()) {
     $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-    $conn->prepare("UPDATE uf_user SET googleauth = ? WHERE id = ?")->ececute([json_encode($client->getAccessToken(), true), $currentID]);
+    $conn->prepare("UPDATE uf_user SET googleauth = ? WHERE id = ?")->execute([json_encode($client->getAccessToken(), true), $currentID]);
   }
   return $client;
 }
@@ -357,6 +357,10 @@ while(true)
 			$timerDate = time();
 			print_r("Grabbing Emails for user " . $row['id'] . "\n");
 			getNewEmails($row['firstgrab'], $row['lastemaildate'], $row['googleauth']);
+			chdir("../..");
+			addTrackingNumbers($row['id']);
+			chdir("messages/".$row['id']);
+			
 		}
 		chdir("..");
 	}
