@@ -1,5 +1,4 @@
 <?php
-
 	/**
 	 * Checks if email is from Amazon and contains link for shipment
 	 * Returns True Boolean if it is, otherwise False Boolean
@@ -7,8 +6,8 @@
 	function checkAmazonEmail($pathToEmailFile) {
 		$text = file_get_contents($pathToEmailFile)
 			or die("Failed to open email file.\n");
-		$target = '/[.]*[Hh]as [Ss]hipped[.]*/i';
-		if (strstr("ship-confirm@amazon.com", $text)) {
+		$target = '/[.]*[Aa]mazon[.]*[Hh]as [Ss]hipped[.]*/i';
+		if (preg_match($target, $text) || strstr("ship-confirm@amazon.com", $text)) {
 			return true;
 		}
 		return false;
