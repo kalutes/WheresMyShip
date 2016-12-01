@@ -24,6 +24,9 @@ class Shipment {
 	/**
 	 * Add email address of sender
 	 */
+	function setSender($sender) {
+		$this->sender = $sender;
+	}
 
 	/**
 	 * Accessors function
@@ -67,8 +70,6 @@ class Shipment {
 
 	/*
 	 * Update function
-	 * @return error code: (-1) for API issues, (0) for other errors, (0) for success
-	 * TODO: complete this function.
 	 */
 	function update() {
 		$returned = upsTrack($this->trackingNumber);
