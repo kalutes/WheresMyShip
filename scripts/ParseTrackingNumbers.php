@@ -1,4 +1,5 @@
 <?php
+require('Shipment.php');
 function addTrackingNumbers($userid){
 
 	$servername = "localhost";
@@ -22,21 +23,18 @@ function addTrackingNumbers($userid){
 			foreach($arr as $e){
 				printf($e."\n");
 
-
 				$stmt = $conn->prepare('SELECT * from uf_shipments WHERE trackingNumber=:trackingNumber');
 				$stmt->bindParam(':trackingNumber', $trackingNumber);
 				$stmt->execute();
-				$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-				if(!$row){
 
 					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber) VALUES (:userid, :trackingNumber)");
+					$shipment = new Shipment($e);
 					$stmt->bindParam(':userid', $userid);
 					$stmt->bindParam(':trackingNumber', $trackingNumber);
 					$trackingNumber = $e;
 					$stmt->execute(); 
 
-				}
 
 				//array_push($trackingNums['ups'],$e);
 				//$upsCount++;
