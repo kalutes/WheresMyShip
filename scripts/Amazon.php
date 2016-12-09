@@ -7,7 +7,7 @@
 		$text = file_get_contents($pathToEmailFile)
 			or die("Failed to open email file.\n");
 		$target = '/[.]*[Aa]mazon[.]*[Hh]as [Ss]hipped[.]*/i';
-		if (preg_match($target, $text) || strstr("ship-confirm@amazon.com", $text)) {
+		if (strstr("ship-confirm@amazon.com", $text) || preg_match($target, $text)) {
 			return true;
 		}
 		return false;
@@ -19,7 +19,7 @@
 	 */
 	function getAmazonLink($pathToEmailFile) {
 		$text = file_get_contents($pathToEmailFile)
-			or die("Failed to open email file.\n");
+			or throw new Exception('Failed to open email file.');
 		$exploded = explode("\"", $text);
 		foreach ($exploded as $potential) {
 			$maybe = htmlspecialchars_decode($potential);
