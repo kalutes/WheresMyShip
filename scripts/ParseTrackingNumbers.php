@@ -22,12 +22,16 @@ function addTrackingNumbers($userid){
 			//search each file for UPS tracking numbers
 			if (checkAmazonEmail($file)) {
 				try {
+					echo "Amazon email!\n";
 					$file = getAmazonLink($file);
 				} catch (Exception $e) {
-					echo $e->getMessage();
-					echo "Crawling email instead...";
-					$arr = __DIR__."/messages/".$userid."/".$fileinfo->getFilename(); // Just for safety because everyone has trust issues with php
+					echo $e->getMessage() . "\n";
+					echo "Crawling email instead...\n";
+					$arr = __DIR__."/messages/".$userid."/".$fileinfo->getFilename(); 
+					// Just for safety because everyone has trust issues with php
 				}
+			} else {
+				echo "Not amazon email.\n";
 			}
 			$arr = parseTrackingNumber($file,'ups');
 			foreach($arr as $e){
@@ -73,7 +77,8 @@ function addTrackingNumbers($userid){
 				array_push($trackingNums['fedex'],$e);
 				$fedexCount++;
 			}*/
-			unlink($file);
+			// We cannot use unlink because usage for URLs are unlink('https://www.amazon.com/blahblahblah') which is dynamically returned by getAmazonLink
+			// unlink($file);
 		}
 	}
 	//print_r($trackingNums);
