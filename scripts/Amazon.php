@@ -5,7 +5,7 @@
 	 */
 	function checkAmazonEmail($pathToEmailFile) {
 		$text = file_get_contents($pathToEmailFile)
-			or die("Failed to open email file.\n");
+		or die("Failed to open email file.\n");
 		$target = '/[.]*[Aa]mazon[.]*[Hh]as [Ss]hipped[.]*/i';
 		if (strstr("ship-confirm@amazon.com", $text) || preg_match($target, $text)) {
 			return true;
@@ -18,17 +18,19 @@
 	 * Throws exception if not found
 	 */
 	function getAmazonLink($pathToEmailFile) {
-		$text = file_get_contents($pathToEmailFile)
-			or throw new Exception('Failed to open email file.');
+		$text = file_get_contents($pathToEmailFile);
+		if (!$text) {
+			throw new Exception('Failed to open email file.');
+		}
 		$exploded = explode("\"", $text);
 		foreach ($exploded as $potential) {
 			$maybe = htmlspecialchars_decode($potential);
 			if (!filter_var($maybe, FILTER_VALIDATE_URL) === false) {
 				if (strstr($maybe, "shiptrack")) {
 					return $maybe;				}
+				}
 			}
+			throw new Exception('Unable to find link to amazon.com with tracking info.');
 		}
-		throw new Exception('Unable to find link to amazon.com with tracking info.');
-	}
 
-?>
+		?>
