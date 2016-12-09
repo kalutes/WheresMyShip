@@ -47,14 +47,17 @@ function addTrackingNumbers($userid){
 				}
 				if($AlreadyInDB == false){
 
-					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber, shipDate, origin, destination, currentLocation, eta, status) VALUES (:userid, :trackingNumber, :shipDate, :origin, :destination, :currentLocation, :eta, :status);");
+					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber, shipDate, origin, destination, currentLocation, eta, status, history) VALUES (:userid, :trackingNumber, :shipDate, :origin, :destination, :currentLocation, :eta, :status, :history);");
 					$shipment = new Shipment($e);
 					$shipDate = $shipment->getShipDate();
 					$origin = $shipment->getOrigin()['ADDRESSLINE1'] . " " . $shipment->getOrigin()['CITY'] . " " . $shipment->getOrigin()['STATEPROVINCECODE'] . " " . $shipment->getOrigin()['POSTALCODE'] . " " . $shipment->getOrigin()['COUNTRYCODE'];
 					$destination = $shipment->getDestination()['CITY'] . " " . $shipment->getDestination()['STATEPROVINCECODE'] . " " . $shipment->getDestination()['POSTALCODE'] . " " . $shipment->getDestination()['COUNTRYCODE'];
 					$currentLocation = $shipment->getCurrentLocation()['CITY'] . " " . $shipment->getCurrentLocation()['STATEPROVINCECODE'] . " " . $shipment->getCurrentLocation()['COUNTRYCODE'];
+					
 					$eta = $shipment->getETA();
-					$status = $shipment->getStatus();
+					$status = 'ADDED TO DATABASE';
+					$history = array();
+					$history_data = serialize($history);
 					$stmt->bindParam(':userid', $userid);
 					$stmt->bindParam(':trackingNumber', $trackingNumber);
 					$stmt->bindParam(':shipDate', $shipDate);
@@ -63,8 +66,9 @@ function addTrackingNumbers($userid){
 					$stmt->bindParam(':currentLocation', $currentLocation);
 					$stmt->bindParam(':eta', $eta);
 					$stmt->bindParam(':status', $status);
+					$stmt->bindParam(':history', $history_data);
 					$trackingNumber = $e;
-					$stmt->execute(); 
+					$stmt->execute();
 				}
 
 

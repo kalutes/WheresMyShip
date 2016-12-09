@@ -21,7 +21,7 @@ while(true){
 	}
 	$counter = 0;
 	foreach ($packages as $package){
-			$stmt = $conn->prepare("UPDATE uf_shipments SET currentLocation=:currentLocation, status=:status, history=:history WHERE trackingNumber=:trackingNumber");
+			$stmt = $conn->prepare("UPDATE uf_shipments SET currentLocation=':currentLocation', status=':status', history=':history' WHERE trackingNumber=':trackingNumber'");
 
 			$trackingNumber = $package; 
 			$history = unserialize($historys[$counter]);

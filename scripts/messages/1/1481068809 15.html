@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;background-color: #f8f8f8;margin: 0;padding: 0;min-width: 100%;width: 100%;">
+<head style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+    <meta charset="UTF-8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+
+    <style style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+        /* global stuff */
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;
+            color: #454545;
+            font-size: 15px;
+        }
+
+        html, body {
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+            min-width: 100%;
+            width: 100%;
+        }
+
+        /* fix for kitkat (android 4.4) */
+        body { margin:0 !important; }
+        div[style*="margin: 16px 0"] { margin:0 !important; }
+
+        a {
+            text-decoration: none;
+        }
+
+        a.blue {
+            color: #336699;
+        }
+
+        a:not(.blue):visited, a:active {
+            color: #454545;
+        }
+
+        .header-links a, .header-links a:visited, .header-links a:active {
+            color: #888888;
+        }
+
+        a:hover {
+            opacity: 1;
+        }
+
+        /* mini-reset */
+        h1, h2, h3, h4, tbody, thead, tr, td, table, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 0;
+        }
+
+        .lighter {
+            font-weight: 100;
+        }
+
+        .light {
+            font-weight: 200;
+        }
+
+        .medium {
+            font-weight: 300;
+        }
+
+        .normal {
+            font-weight: 400;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .trans {
+            background-color: transparent;
+        }
+
+        /* end global stuff */
+
+
+        /* for this and probably most other templates */
+
+        .main,
+        .footer {
+            /* we let the table resize the th and td blocks automatically */
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .preheader {
+            color: transparent;
+            display: none;
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            max-height: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .header-links {
+            width: 100%;
+        }
+
+        .header-links td {
+            text-align: center;
+        }
+
+        .header-links td a {
+            display: inline-block;
+            padding: 20px 5px;
+            line-height: 16px;
+        }
+
+        .header .logo {
+            margin: 0 auto;
+            width: 118px;
+            height: 57px;
+        }
+
+        .padded {
+            padding: 0 25px;
+        }
+
+        .content {
+            background-color: #ffffff;
+            color: #454545;
+            border: 1px solid #dddddd;
+            border-top: 0px solid #ffffff;
+            border-bottom: 0px solid #ffffff;
+        }
+
+
+        /* footer */
+
+        .footer p {
+            font-size: 10px;
+            line-height: 16px;
+            color: #858593;
+            margin: 4px 0;
+        }
+
+        .footer a {
+            font-size: 10px;
+        }
+
+        .footer-content {
+            padding: 0 25px 20px;
+            color: #454545;
+        }
+
+        .social-links {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .social-links a:first-child {
+            margin-left: 0;
+        }
+
+        .social-links a:last-child {
+            margin-right: 0;
+        }
+
+        /* end this and probably most other templates */
+
+
+        /* template specific */
+
+        .header {
+            padding: 15px 25px 25px;
+            vertical-align: top;
+        }
+
+        .tagline {
+            margin: 0 auto;
+            padding: 8px;
+            color: #fff;
+            font-size: 32px;
+            letter-spacing: 2px;
+            line-height: 36px;
+            padding: 18px 0;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            border: 2px solid #ee0000;
+            background: transparent;
+        }
+
+        /* convo bubble corner (red) */
+        .tagline:before {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: -2px;
+            bottom: -17px;
+            border-style: solid;
+            border-width: 14px 23px 3px 5px;
+            border-color: #ee0000 transparent transparent #ee0000;
+        }
+
+        /* convo bubble corner (dark center) */
+        .tagline:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 0;
+            bottom: -15px;
+            border-style: solid;
+            border-width: 14px 22px 1px 0;
+            border-color: #121212 transparent transparent #121212;
+        }
+
+        .header-tagline {
+            padding: 0 25px 45px;
+        }
+
+        .dark {
+            background-color: #292929;
+            background-image: url("http://cdn.nflximg.com/us/dvd/emails/common/header-bg-large-darker.jpg");
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+
+        .content h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #d6d6d6;
+            color: #333;
+        }
+
+        .content h3 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #454545;
+            line-height: 20px;
+        }
+
+        h2 {
+            text-transform: capitalize;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 15px;
+        }
+
+        .content p {
+            margin: 20px 0;
+            line-height: 20px;
+        }
+
+        .button {
+            display: block;
+            border-radius: 1px;
+            background-color: #eee; /* button default gray */
+            width: 184px;
+            height: 20px;
+            min-height: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .button.red {
+            background-color: #ee0000;
+        }
+
+        .button a {
+            color: #000;    /* default black text */
+            cursor: pointer;
+            display: inline-block;
+            height: 100%;
+            text-align: center;
+            width: 100%;
+        }
+
+        .button.red a {
+            color: #fff;
+        }
+
+
+        /* get help section */
+
+        .content .get-help {
+            margin: 30px 0 10px 0;
+            padding-top: 15px;
+        }
+
+        .get-help h2 {
+            font-size: 18px;
+            color: #666;
+            text-transform: capitalize;
+            border-bottom: 1px solid #d6d6d6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .get-help .help-item {
+            display: inline-block;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .help-item.first-item {
+            margin-right: 30px;
+        }
+
+        .help-item p {
+            line-height: 15px;
+            margin-bottom: 4px;
+        }
+
+        .help-item .help-icn {
+            width: 36px;
+            height: 36px;
+            padding-right: 10px;
+        }
+
+
+        /* other footer stuff */
+
+        .button.view-all {
+            width: 100%;
+            height: 40px;
+            background-color: #e10000;
+            padding-top: 2px;
+            padding-bottom: 0px;
+            min-height: 30px;
+            height: 30px;
+        }
+
+        .button.view-all a {
+            font-size: 16px;
+        }
+
+        .hiw .content {
+            padding: 0;
+
+        }
+
+        .hiw td p {
+            color: #666666;
+            font-size: 18px;
+            line-height: 22px;
+        }
+
+        .hiw td p a {
+            font-size: 18px;
+        }
+
+        .main-section {
+            padding-top: 5px;
+        }
+
+        .main-section .image,
+        .main-section .text {
+            vertical-align: top;
+        }
+
+        .main-section > table {
+            margin-bottom: 25px;
+        }
+
+        .main-section .image {
+            width: 200px;
+            padding-right: 15px;
+        }
+
+        .main-section .image img {
+            width: 200px;
+            height: 180px;
+        }
+
+        .banners a {
+            display: inline-block;
+        }
+
+        .banners a img {
+            vertical-align: bottom;
+        }
+
+        /* boxshot grid */
+
+        .boxshot-table {
+            margin: 0 auto;
+        }
+
+        .boxshot-table td {
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .boxshot-table div {
+            display: inline-block;
+        }
+
+        .boxshot-table div.first-row {
+            padding-right: 3px;
+        }
+
+        .boxshot-table div > table {
+            display: inline-block;
+            margin-top: 10px;
+            vertical-align: top;
+            max-width: 130px;
+        }
+
+        .boxshot-table div table td {
+            padding: 10px 3px 0;
+        }
+
+        .boxshot-table .title {
+            padding-top: 2px;
+            text-align: left;
+        }
+
+        .boxshot-table .title a {
+            font-size: 12px;
+            line-height: 14px;
+        }
+
+        .movie-rows div.row {
+            margin-top: 35px;
+        }
+
+        .movie-rows .content.last {
+            padding-bottom: 35px;
+        }
+
+        .movie-rows .content h2 {
+            margin-bottom: 0;
+        }
+
+        .leading td {
+            padding-bottom: 20px;
+        }
+
+        .leading h2 {
+            text-align: center;
+            border-bottom: 0;
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+
+        /* end template specific */
+
+
+        /** media queries **/
+
+        /* we have to use !important everywhere like it's freakin 1999 since we have to run this through an inline-style injection tool... */
+
+        @media yahoo {
+            .button.view-all {
+                padding-top: 8px !important;
+                padding-bottom: 8px !important;
+            }
+        }
+        @media only screen and (min-device-width: 0px) {
+
+            /* reset buttons to use table display mode, we've got a smart client ... */
+            .button {
+                display: table !important;
+                height: 33px !important;
+                min-height: 33px !important;
+            }
+
+            .button a {
+                padding-top: 0 !important;
+                display: table-cell !important;
+                vertical-align: middle;
+            }
+
+            .button.view-all {
+                height: 44px !important;
+                min-height: 44px !important;
+            }
+
+            /* reset help items so they display horizontally when possible */
+
+            .get-help .help-item {
+                margin-top: 10px !important;
+            }
+
+            .get-help .help-item.first-item {
+                margin-right: 30px !important;
+            }
+        }
+
+        /* general attempt to cover all touch devices, doesn't need to be perfect... */
+        @media only screen and (max-device-width: 1024px) {
+
+        }
+
+        /* e.g. iPhone 6 Plus (landscape mode) and below */
+        @media only screen and (max-width: 736px) and (orientation: landscape) {
+            .main-section .text {
+                padding-left: 15px !important;
+            }
+
+            .main-section > table {
+                padding-bottom: 35px !important;
+            }
+
+            .new-releases h2 {
+                padding-top: 10px !important;
+            }
+        }
+
+        @media only screen and (max-width: 599px) {
+            .banners img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        /* anything which needs the main-section table td's wrapped (so < say, 250*2px) */
+        @media only screen and (max-width: 568px) and (orientation: portrait) {
+            .main-section .image img {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .main-section .image {
+                max-width: 1000px !important;
+            }
+
+            .main-section > table {
+                display: block !important;
+            }
+
+            .main-section > table tr {
+                display: block !important;
+            }
+
+            .main-section .image,
+            .main-section .text {
+                width: 100% !important;
+                display: block !important;
+                padding-right: 0 !important;
+            }
+
+            .main-section .text {
+                padding-left: 0 !important;
+                padding-top: 10px !important;
+                width: 100% !important;
+            }
+
+            .main-section > table {
+                padding-bottom: 15px;
+            }
+        }
+
+        /* e.g. iPhone 6 Plus (portrait mode) and below, plus iPhone 4 landscape mode */
+        @media only screen and (max-width: 414px),
+        only screen and (max-width: 480px) and (orientation: landscape) {
+
+            .content h2 {
+                font-size: 18px !important;
+            }
+
+            .header-tagline {
+                padding: 0 15px 45px 15px !important;
+            }
+
+            .header-links .manage-queue {
+                display: none !important;
+            }
+
+            .tagline {
+                padding: 15px !important;
+            }
+
+            .tagline:after {
+                border-color: #111 transparent transparent #111 !important;
+            }
+
+            /* reduce the content padding a bit; it's wasted space */
+            .padded {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+        }
+
+        @media only screen and (max-width: 414px) and (orientation: portrait) {
+        }
+
+        /* anything < iPhone 6 Plus */
+        @media only screen and (max-width: 413px) {
+
+            .get-help .help-item {
+                margin-top: 0 !important;
+            }
+
+            .get-help .help-item.first-item {
+                margin-right: 15px !important;
+            }
+
+        }
+
+        /* anything < iPhone 6 Plus, plus iPhone 4 landscape */
+        @media only screen and (max-width: 413px),
+        only screen and (max-width: 480px) and (orientation: landscape) {
+
+            .tagline {
+                font-size: 24px !important;
+                padding: 10px !important;
+            }
+        }
+
+        /* e.g. iPhone 6 and below */
+        @media only screen and (max-width: 375px) {
+
+            .help-item p {
+                font-size: 13px !important;
+            }
+        }
+
+        /* e.g. iPhone 5s and 5, and below */
+        @media only screen and (max-width: 320px) {
+
+            /* header-links will wrap, so reduce font sizes */
+            .header-links td a {
+                font-size: 13px !important;
+            }
+
+            .button:not(.view-all) a {
+                font-size: 13px !important;
+            }
+
+            .content p, .content p a {
+                font-size: 14px !important;
+                line-height: 17px !important;
+            }
+
+            .boxshot-table img {
+                width: 105px;
+                height: 150px;
+            }
+        }
+
+        @media only screen and (max-width: 320px) and (orientation: portrait) {
+        }
+
+        /* e.g. iPhone 5s and below landscape, and anything < 600px (i.e. total standard template width) and portrait mode */
+        @media only screen and (max-width: 568px) and (orientation: landscape),
+        only screen and (max-width: 599px) and (orientation: portrait) {
+
+            .content {
+                border: none !important;
+            }
+        }
+
+
+        /* e.g. iPhone 4, landscape */
+        @media only screen and (max-width: 480px) and (orientation: landscape) {
+
+        }
+
+        /* high-dpi images go in here... */
+        @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+
+            /* good luck with this in emails... maybe some day in like, 2025 */
+        }
+
+    </style>
+</head>
+<body style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;background-color: #f8f8f8;margin: 0 !important;padding: 0;min-width: 100%;width: 100%;"><IMG SRC="http://et.dvd.netflix.com/t/gbhbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=" WIDTH="1" HEIGHT="1" STYLE="border:0px hidden transparent !important; display:none !important; overflow:hidden; max-height: 0;" ALT=""/>
+<div class="preheader" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: transparent;font-size: 15px;display: none;visibility: hidden;opacity: 0;height: 0;max-height: 0;overflow: hidden;position: absolute;top: 0;left: 0;z-index: -1;">Enjoy your free month to catch up on some of the best movies and TV shows of the year, delivered to your mailbox.</div>
+
+<!-- for outlook we center a table of natural width, defining the container TD as 600px -->
+<center style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+    <table cellpadding="0" cellspacing="0" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;">
+        <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+            <td width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+
+                <!-- header links -->
+
+                <table cellpadding="0" cellspacing="0" border="0" class="main" width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;width: 100%;max-width: 600px;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                            <table class="header-links" cellpadding="0" cellspacing="0" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;width: 100%;">
+                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                    <td width="1" height="56" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="56" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></td>
+                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=r&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #888888;font-size: 15px;text-decoration: none;font-weight: 300;display: inline-block;padding: 20px 5px;line-height: 16px;">New Releases</a></td>
+                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=s&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #888888;font-size: 15px;text-decoration: none;font-weight: 300;display: inline-block;padding: 20px 5px;line-height: 16px;">Coming Soon</a></td>
+                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=t&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #888888;font-size: 15px;text-decoration: none;font-weight: 300;display: inline-block;padding: 20px 5px;line-height: 16px;">TV Shows</a></td>
+                                    <td class="manage-queue" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=u&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #888888;font-size: 15px;text-decoration: none;font-weight: 300;display: inline-block;padding: 20px 5px;line-height: 16px;">How It Works</a></td>
+                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=v&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #888888;font-size: 15px;text-decoration: none;font-weight: 300;display: inline-block;padding: 20px 5px;line-height: 16px;">Sign In</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- logo / header -->
+
+                <table class="main dark" cellpadding="0" cellspacing="0" border="0" width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;width: 100%;max-width: 600px;background-color: #292929;background-image: url(http://cdn.nflximg.com/us/dvd/emails/common/header-bg-large-darker.jpg);background-size: cover;background-position: top center;background-repeat: no-repeat;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="header" align="center" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 15px 25px 25px;vertical-align: top;">
+                            <center style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">
+                                <div class="logo" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;width: 118px;height: 57px;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=w&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/dvd.com-logo-emails-2x.png" width="118" height="61" border="0" alt="DVD Netflix" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></div>
+                            </center>
+                        </td>
+                    </tr>
+
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="header-tagline" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px 45px;">
+                            <!--[if mso]>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border:2px solid #ee0000">
+                                <tr>
+                                    <td width="1" height="74"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="74"></td>
+
+                                    <td style="font-size:32px;color:#ffffff;text-align:center;font-weight:lighter;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+                                        <center>DON'T MISS OUT!<br>NEW RELEASES ADDED WEEKLY</center>
+                                    </td>
+                                    <td width="1" height="74"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="74"></td>
+                                </tr>
+                            </table>
+                            <![endif]-->
+
+                            <![if !mso]>
+                            <h1 class="tagline lighter" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #fff;font-size: 32px;margin: 0 auto;padding: 18px 0;font-weight: 100;letter-spacing: 2px;line-height: 36px;text-transform: uppercase;text-align: center;position: relative;border: 2px solid #ee0000;background: transparent;">DON'T MISS OUT<br style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;">NEW RELEASES ADDED WEEKLY</h1>
+                            <![endif]>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Banners -->
+
+                <table class="main movie-rows" cellpadding="0" cellspacing="0" border="0" width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;width: 100%;max-width: 600px;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="content padded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px;background-color: #ffffff;border: 1px solid #dddddd;border-top: 0px solid #ffffff;border-bottom: 0px solid #ffffff;">
+
+						    <p style="margin:15px 0 0 0;color:#454545;line-height:20px;font-size:15px;font-weight:300;">Dear Matthew,</p>
+                            <p class="medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 20px 0;padding: 0;font-weight: 300;line-height: 20px;">While you've been away we've added so many <strong>award-winning movies</strong> and <strong>hit TV shows</strong> to our collection. Find and enjoy old favorites and yet-undiscovered gems.</p>
+                            <p class="medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 20px 0;padding: 0;font-weight: 300;line-height: 20px;">Every disc is sent to you with <strong>free shipping</strong>, unlimited viewing time, and great service. Plans start as low as $4.99 a month.</p>
+
+                            <!--[if mso]>
+                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=x&amp;q=" style="width:184px" arcsize="2%" fillcolor="#ee0000" stroke="f">
+                                <v:textbox style="mso-fit-shape-to-text:t" inset="0px,9px,0px,9px"><center style="font-size:15px;line-height:13px;color:#FFFFFF;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:normal;mso-line-height-rule:exactly;mso-text-raise:0px">Start Your Free Month</center>
+                                </v:textbox>
+                            </v:roundrect>
+                            <![endif]-->
+
+                            <![if !mso]>
+                            <div class="button red add-movies" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: block;border-radius: 1px;background-color: #ee0000;width: 184px;padding-top: 10px;padding-bottom: 10px;height:20px;min-height:20px;"><a class="normal" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=y&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #fff;font-size: 15px;text-decoration: none;font-weight: 400;cursor: pointer;display: inline-block;height: 100%;text-align: center;width: 100%;">Start Your Free Month</a></div>
+                            <![endif]>
+
+                            <div class="row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin-top: 35px;">
+                                <h2 class="medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #333;font-size: 20px;margin: 0;padding: 0;text-transform: capitalize;padding-bottom: 10px;font-weight: 300;margin-bottom: 0;border-bottom: 1px solid #d6d6d6;">New Releases</h2>
+
+                                <!--[if mso]>
+                                <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                <![endif]-->
+
+                                <!--
+                                WE NEED 4 MOVIES HERE EVERY TIME
+
+                                DATA REQUIREMENTS:
+                                    - movie id
+                                    - title
+
+                                    In StrongView the ID is based on a dynamic content block (see SM_RULE_* below)
+                                -->
+
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;">
+                                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                        <td align="center" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+
+                                            <table cellpadding="0" cellspacing="0" border="0" class="boxshot-table" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;">
+                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div class="first-row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;padding-right: 3px;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=z&amp;q=&amp;y=17u7tEtB" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80100906.jpg" width="123" height="175" border="0" alt="Bad Moms" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=0&amp;q=&amp;y=17u7tEtB" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Bad Moms</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=1&amp;q=&amp;y=1AwEu8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/853911.jpg" width="123" height="175" border="0" alt="Phantasm" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=2&amp;q=&amp;y=1AwEu8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Phantasm</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+
+                                                    <!--[if mso]>
+                                                    <td width="30"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="30" height="1"></td>
+                                                    <![endif]-->
+
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=3&amp;q=&amp;y=17u7tBxE" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80100649.jpg" width="123" height="175" border="0" alt="Don't Breathe" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=4&amp;q=&amp;y=17u7tBxE" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Don't Breathe</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=5&amp;q=&amp;y=17tExBv8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80094621.jpg" width="123" height="175" border="0" alt="Independence Day: Resurgence" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=6&amp;q=&amp;y=17tExBv8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Independence Day: Resurgence</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="content padded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px;background-color: #ffffff;border: 1px solid #dddddd;border-top: 0px solid #ffffff;border-bottom: 0px solid #ffffff;">
+
+                            <div class="row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin-top: 35px;">
+                                <!--[if mso]>
+                                <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                <![endif]-->
+
+                                <h2 class="medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #333;font-size: 20px;margin: 0;padding: 0;text-transform: capitalize;padding-bottom: 10px;font-weight: 300;margin-bottom: 0;border-bottom: 1px solid #d6d6d6;">Documentary</h2>
+
+                                <!--[if mso]>
+                                <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                <![endif]-->
+
+                                <!--
+                                WE NEED 4 MOVIES HERE EVERY TIME
+
+                                DATA REQUIREMENTS:
+                                    - movie id
+                                    - title
+
+                                    In StrongView the ID is based on a dynamic content block (see SM_RULE_* below)
+                                -->
+
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;">
+                                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                        <td align="center" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+
+                                            <table cellpadding="0" cellspacing="0" border="0" class="boxshot-table" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;">
+                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div class="first-row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;padding-right: 3px;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=G&amp;q=&amp;y=17t-2~v8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80039421.jpg" width="123" height="175" border="0" alt="Dark Horse" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=A&amp;q=&amp;y=17t-2~v8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Dark Horse</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=B&amp;q=&amp;y=17u8y8t9" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80115102.jpg" width="123" height="175" border="0" alt="For the Love of Spock" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=C&amp;q=&amp;y=17u8y8t9" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">For the Love of Spock</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+
+                                                    <!--[if mso]>
+                                                    <td width="30"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="30" height="1"></td>
+                                                    <![endif]-->
+
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=D&amp;q=&amp;y=17tE0Av8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80097521.jpg" width="123" height="175" border="0" alt="The Eagle Huntress" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=E&amp;q=&amp;y=17tE0Av8" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">The Eagle Huntress</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IT&amp;4=&amp;k=Dt8tAw~v" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80105342.jpg" width="123" height="175" border="0" alt="Harry and Snowman" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IU&amp;4=&amp;k=Dt8tAw~v" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Harry and Snowman</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="content padded last" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px;background-color: #ffffff;border: 1px solid #dddddd;border-top: 0px solid #ffffff;border-bottom: 0px solid #ffffff;padding-bottom: 35px;">
+
+                            <div class="row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin-top: 35px;">
+                                <!--[if mso]>
+                                <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                <![endif]-->
+
+                                <h2 class="medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #333;font-size: 20px;margin: 0;padding: 0;text-transform: capitalize;padding-bottom: 10px;font-weight: 300;margin-bottom: 0;border-bottom: 1px solid #d6d6d6;">Action & Adventure</h2>
+
+                                <!--[if mso]>
+                                <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                <![endif]-->
+
+                                <!--
+                                WE NEED 4 MOVIES HERE EVERY TIME
+
+                                DATA REQUIREMENTS:
+                                    - movie id
+                                    - title
+
+                                    In StrongView the ID is based on a dynamic content block (see SM_RULE_* below)
+                                -->
+
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;">
+                                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                        <td align="center" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+
+                                            <table cellpadding="0" cellspacing="0" border="0" class="boxshot-table" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;">
+                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div class="first-row" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;padding-right: 3px;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IV&amp;4=&amp;k=Dt72Dv7v" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80098202.jpg" width="123" height="175" border="0" alt="Jason Bourne" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IW&amp;4=&amp;k=Dt72Dv7v" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Jason Bourne</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IX&amp;4=&amp;k=Dt8t~t7t" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80104000.jpg" width="123" height="175" border="0" alt="The Magnificent Seven" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=j&amp;q=&amp;y=17u7x7t7" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">The Magnificent Seven</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+
+                                                    <!--[if mso]>
+                                                    <td width="30"><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="30" height="1"></td>
+                                                    <![endif]-->
+
+                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;text-align: center;vertical-align: top;">
+                                                        <div style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: inline-block;">
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=k&amp;q=&amp;y=17u71BuB" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80108616.jpg" width="123" height="175" border="0" alt="Hell or High Water" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=l&amp;q=&amp;y=17u71BuB" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Hell or High Water</a></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--[if mso]>
+                                                            <img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="1" height="1">
+                                                            <![endif]-->
+
+                                                            <table cellpadding="0" cellspacing="0" border="0" class="faded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;border-collapse: collapse;border: 0;display: inline-block;margin-top: 10px;vertical-align: top;max-width: 130px;">
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: center;vertical-align: top;"><a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=m&amp;q=&amp;y=17tEuA2A" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;text-decoration: none;"><img src="http://cdn.nflximg.com/us/boxshots/ghd/80091595.jpg" width="123" height="175" border="0" alt="Suicide Squad" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a></td>
+                                                                </tr>
+                                                                <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                                                                    <td class="title" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 10px 3px 0;text-align: left;vertical-align: top;padding-top: 2px;"><a class="medium" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=n&amp;q=&amp;y=17tEuA2A" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 12px;text-decoration: none;font-weight: 300;line-height: 14px;">Suicide Squad</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="main leading" cellpadding="0" cellspacing="0" border="0" width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;width: 100%;max-width: 600px;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="content padded" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px;background-color: #ffffff;border: 1px solid #dddddd;border-top: 0px solid #ffffff;border-bottom: 0px solid #ffffff;padding-bottom: 20px;">
+                            <h2 class="normal" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #333;font-size: 24px;margin: 0;padding: 0;text-transform: capitalize;padding-bottom: 10px;font-weight: 400;margin-bottom: 0;border-bottom: 0;text-align: center;">So many choices. So much to enjoy.</h2>
+                            <h2 class="normal" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #333;font-size: 24px;margin: 0;padding: 0;text-transform: capitalize;padding-bottom: 10px;font-weight: 400;margin-bottom: 0;border-bottom: 0;text-align: center;">What are you waiting for?</h2>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- more footer -->
+
+                <table class="main" cellpadding="0" cellspacing="0" border="0" width="600" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;width: 100%;max-width: 600px;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="bottom-button" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                            <!--[if mso]>
+                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=o&amp;q=" style="width:600px;" arcsize="0%" fillcolor="#ee0000" stroke="f">
+                                <v:textbox style="mso-fit-shape-to-text:t" inset="6px,0px,6px,0px"><center style="font-size:16px;line-height:40px;color:#FFFFFF;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:bold;mso-line-height-rule:exactly;mso-text-raise:6px">Start Your Free Month</center>
+                                </v:textbox>
+                            </v:roundrect>
+                            <![endif]-->
+
+                            <![if !mso]>
+                            <div class="button red view-all" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;display: block;border-radius: 1px;background-color: #e10000;width: 100%;padding-top: 10px;padding-bottom: 0px;height:30px;min-height:30px;"><a class="normal" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=p&amp;q=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #fff;font-size: 16px;text-decoration: none;font-weight: 400;cursor: pointer;display: inline-block;height: 100%;text-align: center;width: 100%;">Start Your Free Month</a></div>
+                            <![endif]>
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+
+               <!-- even more footer -->
+                <table class="footer trans" cellpadding="0" cellspacing="0" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0 auto;padding: 0;border-collapse: collapse;border: 0;background-color: transparent;width: 100%;max-width: 600px;">
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="social-links" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 30px 0;text-align: center;">
+                            <a class="instagram" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Id&amp;4=" title="Instagram" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;display: inline-block;width: 30px;height: 30px;margin: 0 10px;margin-left: 0;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/icn_instagram.png" width="30" height="30" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a>
+                            <!--[if mso]><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="15" height="1"><![endif]-->
+                            <a class="twitter" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Ic&amp;4=" title="Twitter" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;display: inline-block;width: 30px;height: 30px;margin: 0 10px;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/icn_twitter.png" width="30" height="30" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a>
+                            <!--[if mso]><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="15" height="1"><![endif]-->
+                            <a class="pinterest" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Ie&amp;4=" title="Pinterest" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;display: inline-block;width: 30px;height: 30px;margin: 0 10px;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/icn_pinterest.png" width="30" height="30" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a>
+                            <!--[if mso]><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="15" height="1"><![endif]-->
+                            <a class="tumblr" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Ia&amp;4=" title="Tumblr" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;display: inline-block;width: 30px;height: 30px;margin: 0 10px;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/icn_tumblr.png" width="30" height="30" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a>
+                            <!--[if mso]><img src="http://cdn.nflximg.com/us/dvd/common/spacer.png" width="15" height="1"><![endif]-->
+                            <a class="facebook" href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IZ&amp;4=" title="Facebook" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;display: inline-block;width: 30px;height: 30px;margin: 0 10px;margin-right: 0;"><img src="http://cdn.nflximg.com/us/dvd/emails/common/icn_facebook.png" width="30" height="30" border="0" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;"></a>
+                        </td>
+                    </tr>
+                    <tr style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0;">
+                        <td class="padded footer-content medium" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 15px;margin: 0;padding: 0 25px 20px;font-weight: 300;">
+                            <p style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #858593;font-size: 10px;margin: 4px 0;padding: 0;line-height: 16px;">This message was mailed to [<a href="mailto:mrashbeck@gmail.com" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;">mrashbeck@gmail.com</a>] by Netflix. SRC 12454:16780241 US</p>
+							<p style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #858593;font-size: 10px;margin: 4px 0;padding: 0;line-height: 16px;">One month DVD free trial offer is available to new and certain former members of the Netflix service. Internet access and valid payment method are required to redeem offer. Netflix will begin to bill your payment method for the DVD Netflix plan selected at the completion of the free trial unless you cancel prior to the end of the free trial. Your DVD Netflix membership is a month-to-month subscription that begins at sign-up. You can cancel at any time. No refunds or credits for partial months. Additional charges apply for Blu-ray access and Netflix streaming service. For terms and conditions, please see our <a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Ib&amp;4=" style="color:#02458c"> Terms of Use</a>.</p>
+							<p style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #858593;font-size: 10px;margin: 4px 0;padding: 0;line-height: 16px;"> This email has been sent to you as a former Netflix member. If you would like to stop receiving these emails, please <a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=q&amp;q=" style="color:#02458c"> click here to unsubscribe</a>. Please do not reply to this email, as we are unable to respond from this email address. If you need help or would like to contact us, please visit our <a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=i&amp;q=" style="color:#02458c"> Help Center</a>.</p>
+                            <p style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #858593;font-size: 10px;margin: 4px 0;padding: 0;line-height: 16px;">Use of the Netflix service and website constitutes acceptance of our <a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=IY&amp;4=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;">Terms of Use</a> and <a href="http://et.dvd.netflix.com/t/gchbaMFgQAC3rIjHtaCJpSOUQxaaaaB3kBMEOUIjaa?n=8@v-y8&amp;X=tkhloUlVr_ZtTpe.jht&amp;e=Ib&amp;4=" style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #454545;font-size: 10px;text-decoration: none;">Privacy Statement</a>.</p>
+                            <p style="box-sizing: border-box;font-family: 'Helvetica Neue', Roboto, Helvetica, Arial, sans-serif;color: #858593;font-size: 10px;margin: 4px 0;padding: 0;line-height: 16px;">&copy; 2016 Netflix, Inc. 100 Winchester Circle, Los Gatos, CA 95032, U.S.A.</p>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</center>
+
+</body>
+</html>
