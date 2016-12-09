@@ -1,5 +1,6 @@
 <?php
 require('Shipment.php');
+require('Amazon.php');
 function addTrackingNumbers($userid){
 
 	$servername = "localhost";
@@ -19,19 +20,32 @@ function addTrackingNumbers($userid){
 		if (!$fileinfo->isDot() && is_file(__DIR__."/messages/".$userid."/".$fileinfo->getFilename())) {
 			$file = __DIR__."/messages/".$userid."/".$fileinfo->getFilename();
 			//search each file for UPS tracking numbers
+			if (checkAmazonEmail($file)) {
+				try {
+					echo "Amazon email!\n";
+					$file = getAmazonLink($file);
+				} catch (Exception $e) {
+					echo $e->getMessage() . "\n";
+					echo "Crawling email instead...\n";
+					$arr = __DIR__."/messages/".$userid."/".$fileinfo->getFilename(); 
+					// Just for safety because everyone has trust issues with php
+				}
+			} else {
+				echo "Not amazon email.\n";
+			}
 			$arr = parseTrackingNumber($file,'ups');
 			foreach($arr as $e){
 				printf($e."\n");
-						
 
-					$AlreadyInDB = false;
-					$query = $conn->query('SELECT * FROM uf_shipments WHERE trackingNumber=' . '"' . $e . '"' . ';');
-					foreach ($query as $row){
-						if(strcasecmp($row['trackingNumber'], $e) == 0){
-								$AlreadyInDB = true;	
-						}
+
+				$AlreadyInDB = false;
+				$query = $conn->query('SELECT * FROM uf_shipments WHERE trackingNumber=' . '"' . $e . '"' . ';');
+				foreach ($query as $row){
+					if(strcasecmp($row['trackingNumber'], $e) == 0){
+						$AlreadyInDB = true;	
 					}
-					if($AlreadyInDB == false){
+				}
+				if($AlreadyInDB == false){
 
 					$stmt = $conn->prepare("INSERT INTO uf_shipments (userid, trackingNumber, shipDate, origin, destination, currentLocation, eta, status) VALUES (:userid, :trackingNumber, :shipDate, :origin, :destination, :currentLocation, :eta, :status);");
 					$shipment = new Shipment($e);
@@ -51,7 +65,7 @@ function addTrackingNumbers($userid){
 					$stmt->bindParam(':status', $status);
 					$trackingNumber = $e;
 					$stmt->execute(); 
-					}
+				}
 
 
 				//array_push($trackingNums['ups'],$e);
@@ -65,7 +79,8 @@ function addTrackingNumbers($userid){
 				array_push($trackingNums['fedex'],$e);
 				$fedexCount++;
 			}*/
-			unlink($file);
+			// We cannot use unlink because usage for URLs are unlink('https://www.amazon.com/blahblahblah') which is dynamically returned by getAmazonLink
+			// unlink($file);
 		}
 	}
 	//print_r($trackingNums);
@@ -79,29 +94,29 @@ function parseTrackingNumber($fileName, $shipper)
 	$shipperCaps = strtoupper($shipper);
 	$trackingNumbers= array();
 	$text = file_get_contents($fileName)
-		or die("Unable to get contents of HTML File\n");
+	or die("Unable to get contents of HTML File\n");
 	$regex=NULL;
 	switch($shipperCaps){
 		case 'UPS':
 			//UPS Case
-			$regex = '/[^a-zA-Z0-9](1Z|1z)([a-zA-z0-9]{16})/';
-			if(preg_match_all($regex,$text,$matches)){
+		$regex = '/[^a-zA-Z0-9](1Z|1z)([a-zA-z0-9]{16})/';
+		if(preg_match_all($regex,$text,$matches)){
 				//var_dump($matches[0]);
-				$trackingNumbers= getValidUPSArray($matches[0]);
+			$trackingNumbers= getValidUPSArray($matches[0]);
 
 				// print_r($trackingNumbers);
-			}
-			else $trackNumbers=NULL;
-			break;
+		}
+		else $trackNumbers=NULL;
+		break;
 		case 'FEDEX':
 			// FedEx case
-			$regex = '/[^a-zA-Z0-9][0-9][0-9]{14}(?=[^0-9])/';
-			if(preg_match_all($regex,$text,$matches)){
-				$trackingNumbers= getValidFedExArray($matches[0]);
+		$regex = '/[^a-zA-Z0-9][0-9][0-9]{14}(?=[^0-9])/';
+		if(preg_match_all($regex,$text,$matches)){
+			$trackingNumbers= getValidFedExArray($matches[0]);
 				// print_r($trackingNumbers);
-			}
-			else $trackNumbers=NULL;
-			break;
+		}
+		else $trackNumbers=NULL;
+		break;
 	}
 	// printf($shipper);
 	print_r($trackingNumbers);
