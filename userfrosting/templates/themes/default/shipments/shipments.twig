@@ -24,6 +24,15 @@
                 );
             });
         </script>
+        <style>
+        table.sortable thead {
+        background-color:#eee;
+        color:#666666;
+        font-weight: bold;
+        cursor: default;
+    }
+
+        </style>
         {% endblock %}
          {% block content %}
          <h1>Your Shipments:</h1>
@@ -31,15 +40,14 @@
 
 
 
-         <table>
+         <table class="sortable">
         <tr style="font-weight:bold;font-size:15px">
-            <td style= "padding-bottom:10px;">#</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Tracking Number</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Shipment Date</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Shipment Origin</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Shipment Destination</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Current Location</td>
-            <td style="padding-bottom:10px;padding-left:20px;">Estimated Time of Arrival</td>
+            <th style="padding-bottom:10px;padding-left:20px;">Tracking Number</th>
+            <th style="padding-bottom:10px;padding-left:20px;">Shipment Date</th>
+            <th style="padding-bottom:10px;padding-left:20px;" class = "sorttable_numeric">Shipment Origin</th>
+            <th style="padding-bottom:10px;padding-left:20px;">Shipment Destination</th>
+            <th style="padding-bottom:10px;padding-left:20px;">Current Location</th>
+            <th style="padding-bottom:10px;padding-left:20px;">Estimated Time of Arrival</th>
         </tr>
         <script >
             function getDate(string)
@@ -52,6 +60,16 @@
                     + date.substring(0,4));
                 }
             }
+            function splitAddress(string)
+            {
+                var address = string;
+                if(typeof address == "string")
+                {
+                    document.write("<td style='padding-left:20px' sorttable_customkey = " +
+                    address.split(" ")[0]
+                    +">"+ address +"</td>")
+                }
+            }
         </script>
         {% set increment = 1 %}
         {% if trackingNumbers|length == 0 %}
@@ -61,15 +79,13 @@
                 <h4>You have {{ trackingNumbers|length }} tracking numbers:</h4>
          {% for trackingNumber in trackingNumbers %}
          <tr>
-             <td>{{increment}}.</td>
              <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
              <td style="padding-left:20px"><script >getDate({{trackingNumber.shipDate}})</script></td>
-             <td style="padding-left:20px">{{trackingNumber.origin}}</td>
+             <script>splitAddress("{{trackingNumber.origin}}")</script>
              <td style="padding-left:20px">{{trackingNumber.destination}}</td>
              <td style="padding-left:20px">{{trackingNumber.currentLocation}}</td>
              <td style="padding-left:20px"><script>getDate({{trackingNumber.eta}})</script></td>
         </tr>
-        {% set increment = increment + 1 %}
          {% endfor %}
         </table>
      {% endif %}

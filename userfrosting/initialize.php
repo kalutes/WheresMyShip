@@ -279,6 +279,7 @@ $app->hook('includes.js.register', function () use ($app){
     $app->schema->registerJS("common", "bootstrap-switch.js");
     $app->schema->registerJS("common", "handlebars-v1.2.0.js");
     $app->schema->registerJS("common", "userfrosting.js");
+	$app->schema->registerJS("common", "sorttable.js");
 
     // Dashboard JS
     $app->schema->registerJS("dashboard", "lib/raphael.js");
