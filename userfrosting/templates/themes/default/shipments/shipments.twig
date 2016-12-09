@@ -41,19 +41,33 @@
             <td style="padding-bottom:10px;padding-left:20px;">Current Location</td>
             <td style="padding-bottom:10px;padding-left:20px;">Estimated Time of Arrival</td>
         </tr>
+        <script >
+            function getDate(string)
+            {
+                var date =string;
+                if(typeof date == "number"){
+                    date=date.toString();
+                    document.write(date.substring(4,6) + "/"
+                    + date.substring(6,8)+ "/"
+                    + date.substring(0,4));
+                }
+            }
+        </script>
         {% set increment = 1 %}
         {% if trackingNumbers|length == 0 %}
         <div class="form-group">You have no tracking numbers</div>
         {% else %}
+
+                <h4>You have {{ trackingNumbers|length }} tracking numbers:</h4>
          {% for trackingNumber in trackingNumbers %}
          <tr>
              <td>{{increment}}.</td>
              <td style="padding-left:20px">{{trackingNumber.trackingNumber}}</td>
-             <td style="padding-left:20px"><script>var dickbutt ={{trackingNumber.shipDate}};dickbutt=dickbutt.toString();document.write(dickbutt.substring(4,6) + "/" + dickbutt.substring(6,8)+ "/" + dickbutt.substring(0,4));</script></td>
+             <td style="padding-left:20px"><script >getDate({{trackingNumber.shipDate}})</script></td>
              <td style="padding-left:20px">{{trackingNumber.origin}}</td>
              <td style="padding-left:20px">{{trackingNumber.destination}}</td>
              <td style="padding-left:20px">{{trackingNumber.currentLocation}}</td>
-             <td style="padding-left:20px"><script>var dickbutt ={{trackingNumber.eta}};dickbutt=dickbutt.toString();document.write(dickbutt.substring(4,6) + "/" + dickbutt.substring(6,8)+ "/" + dickbutt.substring(0,4));</script></td>
+             <td style="padding-left:20px"><script>getDate({{trackingNumber.eta}})</script></td>
         </tr>
         {% set increment = increment + 1 %}
          {% endfor %}
