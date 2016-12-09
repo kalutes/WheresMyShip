@@ -8,7 +8,6 @@ $dbname = "userfrosting";
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 while(true){
-	print 'NEW QUERY';
 	$query = $conn->query('SELECT * FROM uf_shipments;');
 	foreach ($query as $row){
 		$currstatus = $row['status'];
@@ -22,10 +21,8 @@ while(true){
 			$stmt->bindParam(':currentLocation', $currentLocation);
 			$stmt->bindParam(':status', $status);
 			$stmt->execute(); 
-			print 'NOT DELIVERED';
 
 		}
-			print 'DELIVERED';
 
 	}
 }
