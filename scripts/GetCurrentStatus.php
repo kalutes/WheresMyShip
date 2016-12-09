@@ -29,16 +29,14 @@ while(true){
 			$shipment = new Shipment($trackingNumber);
 			$currentLocation = $shipment->getCurrentLocation()['CITY'] . " " . $shipment->getCurrentLocation()['STATEPROVINCECODE'] . " " . $shipment->getCurrentLocation()['COUNTRYCODE'];
 			$status = $shipment->getStatus();
-			array_push($history, $status + ' ' + $currentLocation);
+			array_push($history, ($status . " " . $currentLocation));
+			print_r($history);
 			$history = serialize($history);
+			print_r(unserialize($history));
 			$stmt->bindParam(':trackingNumber', $trackingNumber);
-			printf("%s\n", $trackingNumber);
 			$stmt->bindParam(':currentLocation', $currentLocation);
-			printf("%s\n", $currentLocation);
 			$stmt->bindParam(':status', $status);
-			printf("%s\n", $status);
 			$stmt->bindParam(':history', $history);
-			printf("%s\n", $history);
 			$stmt->execute(); 
 
 
